@@ -21,6 +21,7 @@ import numpy as np
 # Reuse your existing validation pipeline + dataset
 from src.model_validation.run_validation import ValidationPipeline
 from src.model_validation.test_dataset import TestDataset
+from src.config import BIAS_CONFIG
 
 
 @dataclass
@@ -224,7 +225,7 @@ def main():
     report = detector.check_bias(
         min_samples=3,        # only consider groups with >=3 test cases
         max_allowed_gap=0.20, # max 20 percentage point difference in avg scores
-        min_group_score=0.60, # each group should have at least 60% avg score
+        min_group_score=BIAS_CONFIG["min_score_threshold"], # each group should have at least 60% avg score
     )
 
     print("\n📊 GLOBAL BIAS METRICS")
@@ -266,8 +267,8 @@ def main():
 
     # CI/CD GATEKEEPER
     # Fail if overall score is too low
-    if report["global"]["global_avg_overall_score"] < 0.6:
-        print(f"❌ FAILURE: Overall score {report['global']['global_avg_overall_score']:.2f} is below threshold 0.6")
+    if report["global"]["global_avg_overall_score"] < BIAS_CONFIG["min_score_threshold"]:
+        print(f"❌ FAILURE: Overall score {report['global']['global_avg_overall_score']:.2f} is below threshold {BIAS_CONFIG['min_score_threshold']}")
         sys.exit(1)
 
     print("✅ SUCCESS: Model passed validation thresholds.")
