@@ -1,10 +1,10 @@
 {
     "bias_passed": true,
     "global": {
-        "global_avg_overall_score": 0.4699370429045272,
+        "global_avg_overall_score": 0.46558647111673945,
         "global_avg_success_rate": 1.0,
-        "max_group_avg_score": 0.4699370429045272,
-        "min_group_avg_score": 0.4699370429045272,
+        "max_group_avg_score": 0.46558647111673945,
+        "min_group_avg_score": 0.46558647111673945,
         "max_gap": 0.0,
         "max_allowed_gap": 0.2,
         "min_group_score_threshold": 0.2
@@ -14,8 +14,8 @@
             "num_tests": 20,
             "num_success": 20,
             "success_rate": 1.0,
-            "avg_overall_score": 0.4699370429045272,
-            "avg_groundedness": 0.7975116364667048
+            "avg_overall_score": 0.46558647111673945,
+            "avg_groundedness": 0.8135130575614576
         }
     },
     "failures": {

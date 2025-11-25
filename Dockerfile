@@ -22,7 +22,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # ---------- Copy project code ----------
 # Copy src directory
 COPY src/ ./src/
-COPY scripts/ ./scripts/
+
 
 # Add project root to PYTHONPATH
 ENV PYTHONPATH=/app

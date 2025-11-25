@@ -13,7 +13,7 @@ services:
       - GCP_LOCATION=us-central1
     volumes:
       - ./src:/app/src
-      - ./scripts:/app/scripts
+
       - ./logs:/app/logs
       - ./results:/app/results
       - type: bind
