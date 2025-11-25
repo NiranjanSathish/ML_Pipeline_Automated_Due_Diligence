@@ -1,7 +1,7 @@
 """
 validation/test_dataset.py
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Generate test dataset from fake data for validation
+Generate test dataset from Qdrant data for validation
 """
 
 import sys
@@ -14,15 +14,21 @@ from datetime import datetime
 class TestDataset:
     """Generate and manage test queries with ground truth"""
     
-    def __init__(self):
-        # These match the fake companies in generate_and_store.py
-        self.companies = [
-            {"name": "TechCorp", "ticker": "TECH", "cik": "0001234567"},
-            {"name": "FinanceInc", "ticker": "FIN", "cik": "0001234568"},
-            {"name": "HealthPlus", "ticker": "HLTH", "cik": "0001234569"},
-        ]
+    def __init__(self, filepath: str = "src/model_validation/test_dataset.json"):
+        import os
         
-        self.test_cases = self._generate_test_cases()
+        if os.path.exists(filepath):
+            print(f"📂 Loading test dataset from {filepath}...")
+            self.test_cases = self.load_from_file(filepath)
+        else:
+            print("⚠️ Synthetic test dataset not found. Falling back to hardcoded fake data.")
+            # These match the fake companies in generate_and_store.py
+            self.companies = [
+                {"name": "TechCorp", "ticker": "TECH", "cik": "0001234567"},
+                {"name": "FinanceInc", "ticker": "FIN", "cik": "0001234568"},
+                {"name": "HealthPlus", "ticker": "HLTH", "cik": "0001234569"},
+            ]
+            self.test_cases = self._generate_test_cases()
     
     def _generate_test_cases(self) -> List[Dict]:
         """Generate test cases with ground truth"""
@@ -132,7 +138,7 @@ class TestDataset:
         print(f"✅ Test dataset saved to {filepath}")
     
     @staticmethod
-    def load_from_file(filepath: str = "validation/test_dataset.json") -> List[Dict]:
+    def load_from_file(filepath: str = "src/model_validation/test_dataset.json") -> List[Dict]:
         """Load test dataset from JSON file"""
         with open(filepath, 'r') as f:
             data = json.load(f)
@@ -146,4 +152,5 @@ if __name__ == "__main__":
     
     print(f"\n📊 Generated {len(dataset.test_cases)} test cases")
     print("\nSample test case:")
-    print(json.dumps(dataset.test_cases[0], indent=2))
+    if dataset.test_cases:
+        print(json.dumps(dataset.test_cases[0], indent=2))
