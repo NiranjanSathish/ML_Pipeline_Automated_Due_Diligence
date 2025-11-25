@@ -33,13 +33,25 @@ class GroupStats:
     success_rate: float
 
 
+class NumpyEncoder(json.JSONEncoder):
+    """Special json encoder for numpy types"""
+    def default(self, obj):
+        if isinstance(obj, np.integer):
+            return int(obj)
+        if isinstance(obj, np.floating):
+            return float(obj)
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        return super(NumpyEncoder, self).default(obj)
+
+
 class BiasDetector:
     """
     Run validation and compute bias metrics across groups (e.g., per company/ticker).
 
     Grouping strategy:
       - We group by ticker inferred from query_id prefix (e.g., 'TECH_01' -> 'TECH')
-        which maps cleanly to companies in TestDataset. :contentReference[oaicite:3]{index=3}
+        which maps cleanly to companies in TestDataset.
     """
 
     def __init__(self, results: Optional[List[Dict]] = None):
@@ -246,208 +258,6 @@ def main():
         print("\n✅ BIAS CHECK PASSED")
         exit_code = 0
 
-```python
-        # Optional: map query_id -> metadata from TestDataset if you want richer slicing
-        self.test_cases = {tc["query_id"]: tc for tc in TestDataset().get_test_cases()}
-
-    # ─────────────────────────────────────────────────────────────
-    # Grouping & stats
-    # ─────────────────────────────────────────────────────────────
-
-    def _get_group_id(self, result: Dict) -> str:
-        """
-        Define the 'group' for this test.
-
-        Here we use ticker (prefix of query_id) as a group identifier:
-          TECH_01 -> TECH
-          FIN_02  -> FIN
-          HLTH_03 -> HLTH
-        """
-        qid = result.get("query_id", "")
-        if "_" in qid:
-            return qid.split("_")[0]
-        return "UNKNOWN"
-
-    def compute_group_stats(self, min_samples: int = 1) -> Dict[str, GroupStats]:
-        """
-        Aggregate performance metrics per group.
-        """
-        buckets = defaultdict(list)
-
-        for r in self.results:
-            group_id = self._get_group_id(r)
-            buckets[group_id].append(r)
-
-        group_stats: Dict[str, GroupStats] = {}
-
-        for group_id, group_results in buckets.items():
-            if len(group_results) < min_samples:
-                continue
-
-            # Only successful runs for metric averages
-            successful = [gr for gr in group_results if gr.get("status") == "success"]
-            num_tests = len(group_results)
-            num_success = len(successful)
-            success_rate = num_success / num_tests if num_tests > 0 else 0.0
-
-            if successful:
-                overall_scores = [gr.get("overall_score", 0.0) for gr in successful]
-                groundedness_scores = [
-                    gr.get("groundedness", {}).get("score", 0.0) for gr in successful
-                ]
-                avg_overall = float(np.mean(overall_scores))
-                avg_grounded = float(np.mean(groundedness_scores))
-            else:
-                avg_overall = 0.0
-                avg_grounded = 0.0
-
-            group_stats[group_id] = GroupStats(
-                group_id=group_id,
-                num_tests=num_tests,
-                num_success=num_success,
-                avg_overall_score=avg_overall,
-                avg_groundedness=avg_grounded,
-                success_rate=success_rate,
-            )
-
-        return group_stats
-
-    # ─────────────────────────────────────────────────────────────
-    # Bias check logic
-    # ─────────────────────────────────────────────────────────────
-
-    def check_bias(
-        self,
-        min_samples: int = 3,
-        max_allowed_gap: float = 0.20,
-        min_group_score: float = 0.60,
-    ) -> Dict:
-        """
-        Check for bias across groups.
-
-        Rules (simple but defensible for the assignment):
-          1. Only consider groups with at least `min_samples` test cases.
-          2. Compute each group's avg overall_score and success_rate.
-          3. Compute global averages.
-          4. Bias flags:
-             - any group's avg_overall_score < `min_group_score`
-             - OR (max_group_avg - min_group_avg) > `max_allowed_gap`
-
-        Returns a dict with 'bias_passed' and per-group metrics.
-        """
-        group_stats = self.compute_group_stats(min_samples=min_samples)
-
-        if not group_stats:
-            return {
-                "bias_passed": False,
-                "reason": "No groups with sufficient samples",
-                "groups": {},
-            }
-
-        # Global metrics
-        all_groups = list(group_stats.values())
-        global_avg_score = float(np.mean([g.avg_overall_score for g in all_groups]))
-        global_success_rate = float(np.mean([g.success_rate for g in all_groups]))
-
-        # Disparity metrics
-        scores = [g.avg_overall_score for g in all_groups]
-        max_score = max(scores)
-        min_score = min(scores)
-        max_gap = max_score - min_score
-
-        # Check per-group thresholds
-        per_group_failures = []
-        for g in all_groups:
-            if g.avg_overall_score < min_group_score:
-                per_group_failures.append(
-                    f"group {g.group_id} avg_overall_score={g.avg_overall_score:.3f} < {min_group_score:.3f}"
-                )
-
-        disparity_failure = max_gap > max_allowed_gap
-
-        bias_passed = not per_group_failures and not disparity_failure
-
-        return {
-            "bias_passed": bias_passed,
-            "global": {
-                "global_avg_overall_score": global_avg_score,
-                "global_avg_success_rate": global_success_rate,
-                "max_group_avg_score": max_score,
-                "min_group_avg_score": min_score,
-                "max_gap": max_gap,
-                "max_allowed_gap": max_allowed_gap,
-                "min_group_score_threshold": min_group_score,
-            },
-            "per_group": {
-                g.group_id: {
-                    "num_tests": g.num_tests,
-                    "num_success": g.num_success,
-                    "success_rate": g.success_rate,
-                    "avg_overall_score": g.avg_overall_score,
-                    "avg_groundedness": g.avg_groundedness,
-                }
-                for g in all_groups
-            },
-            "failures": {
-                "per_group_thresholds": per_group_failures,
-                "disparity_failure": disparity_failure,
-            },
-        }
-
-
-def main():
-    print("\n" + "=" * 70)
-    print("🧪 BIAS DETECTION ACROSS GROUPS (e.g., TICKERS/COMPANIES)")
-    print("=" * 70)
-
-    # For now: run a fresh validation pass and reuse its results
-    pipeline = ValidationPipeline()
-    results = pipeline.run_all_tests(limit=None)
-
-    detector = BiasDetector(results=results)
-    report = detector.check_bias(
-        min_samples=3,        # only consider groups with >=3 test cases
-        max_allowed_gap=0.20, # max 20 percentage point difference in avg scores
-        min_group_score=0.60, # each group should have at least 60% avg score
-    )
-
-    print("\n📊 GLOBAL BIAS METRICS")
-    for k, v in report["global"].items():
-        if isinstance(v, float):
-            print(f"  {k}: {v:.3f}")
-        else:
-            print(f"  {k}: {v}")
-
-    print("\n📊 PER-GROUP METRICS")
-    for group_id, stats in report["per_group"].items():
-        print(f"\n  Group: {group_id}")
-        print(f"    num_tests:       {stats['num_tests']}")
-        print(f"    success_rate:    {stats['success_rate']:.3f}")
-        print(f"    avg_overall:     {stats['avg_overall_score']:.3f}")
-        print(f"    avg_groundedness:{stats['avg_groundedness']:.3f}")
-
-    if report["failures"]["per_group_thresholds"] or report["failures"]["disparity_failure"]:
-        print("\n❌ BIAS CHECK FAILED")
-        if report["failures"]["per_group_thresholds"]:
-            print("  Per-group issues:")
-            for msg in report["failures"]["per_group_thresholds"]:
-                print(f"   - {msg}")
-        if report["failures"]["disparity_failure"]:
-            print(
-                f"  Score disparity too high: max_gap={report['global']['max_gap']:.3f} "
-                f"> max_allowed_gap={report['global']['max_allowed_gap']:.3f}"
-            )
-        exit_code = 1
-    else:
-        print("\n✅ BIAS CHECK PASSED")
-        exit_code = 0
-
-    # Optionally save bias report JSON for CI artifacts
-    bias_report = {
-        "bias_passed": report["bias_passed"],
-        "global": report["global"],
-        "per_group": report["per_group"],
-    }
     # Save report
     with open("src/model_validation/bias_report.json", "w") as f:
         json.dump(report, f, indent=4, cls=NumpyEncoder)
@@ -456,8 +266,8 @@ def main():
 
     # CI/CD GATEKEEPER
     # Fail if overall score is too low
-    if report["overall_score"] < 0.6:
-        print(f"❌ FAILURE: Overall score {report['overall_score']:.2f} is below threshold 0.6")
+    if report["global"]["global_avg_overall_score"] < 0.6:
+        print(f"❌ FAILURE: Overall score {report['global']['global_avg_overall_score']:.2f} is below threshold 0.6")
         sys.exit(1)
 
     print("✅ SUCCESS: Model passed validation thresholds.")
@@ -466,4 +276,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-```
