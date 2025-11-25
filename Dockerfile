@@ -17,6 +17,9 @@ WORKDIR /app
 # Copy only requirements first for better layer caching
 COPY requirements.txt .
 
+# Install CPU-only torch first to avoid downloading huge CUDA wheels
+RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
+
 RUN pip install --no-cache-dir -r requirements.txt
 
 # ---------- Copy project code ----------
