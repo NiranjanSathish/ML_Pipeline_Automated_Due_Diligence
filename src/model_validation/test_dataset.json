@@ -1,291 +1,146 @@
 {
-  "generated_at": "2025-11-20T18:36:22.653788",
-  "num_test_cases": 15,
+  "generated_at": "now",
+  "source": "synthetic_qdrant",
   "test_cases": [
     {
-      "query_id": "TECH_01",
-      "query": "What is TechCorp?",
-      "company": "TechCorp",
-      "ticker": "TECH",
-      "expected_answer_contains": [
-        "TechCorp",
-        "leading company",
-        "Founded"
-      ],
-      "required_sources": [
-        "wikipedia"
-      ],
-      "required_sections": [
-        "Company Overview"
-      ],
-      "evaluation_type": "contains"
+      "query_id": "SYN_001",
+      "query": "Operating lease right-of-use assets 2025 24823 and 2024 18961",
+      "target_chunk_id": "03e24362-2183-52be-9ec7-718a23af9d3d",
+      "target_chunk_text": "|  |  |  |  |  |  |  |  |  |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n|  |  |  |  |  |  |  |  |  |\n| (In millions, except lease term and discount rate) |  |  | |  |  |  | |  |\n|  |  |  ...",
+      "company": "Microsoft Corporation"
     },
     {
-      "query_id": "TECH_02",
-      "query": "What was TechCorp's revenue in Q1 2024?",
-      "company": "TechCorp",
-      "ticker": "TECH",
-      "expected_answer_contains": [
-        "revenue",
-        "Q1 2024",
-        "$",
-        "M"
-      ],
-      "required_sources": [
-        "sec"
-      ],
-      "required_sections": [
-        "Financial Performance"
-      ],
-      "evaluation_type": "contains"
+      "query_id": "SYN_002",
+      "query": "Rothschild & Co Redburn downgrades Amazon stock due to generative AI concerns",
+      "target_chunk_id": "01ba25d9-fa64-5d33-8aa0-0ddba9ca1457",
+      "target_chunk_text": "Amazon.com, Inc. (NASDAQ:AMZN) is one of the AI Stocks Making Moves on Wall Street. On November 18, Rothschild & Co Redburn\u2019s Alexander Haissl downgraded the stock to \u201cNeutral\u201d from buy with a $250 pr...",
+      "company": "Amazon.com Inc."
     },
     {
-      "query_id": "TECH_03",
-      "query": "Analyze TechCorp's revenue growth over the past year",
-      "company": "TechCorp",
-      "ticker": "TECH",
-      "expected_answer_contains": [
-        "growth",
-        "revenue",
-        "%"
-      ],
-      "required_sources": [
-        "sec"
-      ],
-      "required_sections": [
-        "Financial Performance",
-        "Growth Analysis"
-      ],
-      "evaluation_type": "contains"
+      "query_id": "SYN_003",
+      "query": "Apple Inc. segment revenue and income data for the three and six month periods ended March 29, 2025 and March 30, 2024",
+      "target_chunk_id": "04ad21ed-a1f6-552b-a560-9e3520c77e5a",
+      "target_chunk_text": "**Table Description:** **Segment Revenue and Income by Reportable Segment**\n\nThis table presents revenue and income data by reportable segment for Apple Inc. for the three- and six-month periods ended...",
+      "company": "Apple Inc."
     },
     {
-      "query_id": "TECH_04",
-      "query": "What are the latest developments at TechCorp?",
-      "company": "TechCorp",
-      "ticker": "TECH",
-      "expected_answer_contains": [
-        "TechCorp",
-        "news"
-      ],
-      "required_sources": [
-        "news"
-      ],
-      "required_sections": [
-        "Recent Developments"
-      ],
-      "evaluation_type": "contains"
+      "query_id": "SYN_004",
+      "query": "Amazon net sales for North America, International, and AWS for the three and six months ended June 30, 2023 and 2024",
+      "target_chunk_id": "04242e04-85bf-52a2-88b6-95fed0cb50af",
+      "target_chunk_text": "|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- ...",
+      "company": "Amazon.com Inc."
     },
     {
-      "query_id": "TECH_05",
-      "query": "Provide a comprehensive due diligence report for TechCorp",
-      "company": "TechCorp",
-      "ticker": "TECH",
-      "expected_answer_contains": [
-        "TechCorp",
-        "revenue",
-        "founded"
-      ],
-      "required_sources": [
-        "sec",
-        "wikipedia",
-        "news"
-      ],
-      "required_sections": [
-        "Company Overview",
-        "Financial Performance",
-        "Recent Developments"
-      ],
-      "evaluation_type": "comprehensive"
+      "query_id": "SYN_005",
+      "query": "December 31, 2023 unrealized losses on securities less than 12 months and 12 months or greater",
+      "target_chunk_id": "00e21349-42f9-5271-8e38-c64142270847",
+      "target_chunk_text": "|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | -...",
+      "company": "Microsoft Corporation"
     },
     {
-      "query_id": "FIN_01",
-      "query": "What is FinanceInc?",
-      "company": "FinanceInc",
-      "ticker": "FIN",
-      "expected_answer_contains": [
-        "FinanceInc",
-        "leading company",
-        "Founded"
-      ],
-      "required_sources": [
-        "wikipedia"
-      ],
-      "required_sections": [
-        "Company Overview"
-      ],
-      "evaluation_type": "contains"
+      "query_id": "SYN_006",
+      "query": "Microsoft fiscal year 2024 second quarter highlights",
+      "target_chunk_id": "01d76412-e1a5-5f28-861e-b7dfe338acbb",
+      "target_chunk_text": "Our most significant expenses are related to compensating employees; supporting and investing in our cloud-based services, including datacenter operations; designing, manufacturing, marketing, and sel...",
+      "company": "Microsoft Corporation"
     },
     {
-      "query_id": "FIN_02",
-      "query": "What was FinanceInc's revenue in Q1 2024?",
-      "company": "FinanceInc",
-      "ticker": "FIN",
-      "expected_answer_contains": [
-        "revenue",
-        "Q1 2024",
-        "$",
-        "M"
-      ],
-      "required_sources": [
-        "sec"
-      ],
-      "required_sections": [
-        "Financial Performance"
-      ],
-      "evaluation_type": "contains"
+      "query_id": "SYN_007",
+      "query": "Employee Stock Purchase Plan shares purchased and average price per share for 2025, 2024, and 2023",
+      "target_chunk_id": "00548edd-3310-50ec-8a01-fd8eee1576a6",
+      "target_chunk_text": "PART II\n\nItem 8\n\nEmployee Stock Purchase Plan\n\nWe have an ESPP for all eligible employees. Shares of our common stock may be purchased by employees at three-month intervals at 90% of the fair market v...",
+      "company": "Microsoft Corporation"
     },
     {
-      "query_id": "FIN_03",
-      "query": "Analyze FinanceInc's revenue growth over the past year",
-      "company": "FinanceInc",
-      "ticker": "FIN",
-      "expected_answer_contains": [
-        "growth",
-        "revenue",
-        "%"
-      ],
-      "required_sources": [
-        "sec"
-      ],
-      "required_sections": [
-        "Financial Performance",
-        "Growth Analysis"
-      ],
-      "evaluation_type": "contains"
+      "query_id": "SYN_008",
+      "query": "Statement of Stockholders\u2019 Equity for the Three Months Ended September 30, 2024 including settlement of warrants and issuance of common stock for equity incentive awards",
+      "target_chunk_id": "01a1001f-286c-5094-9d5a-43892c116cc9",
+      "target_chunk_text": "|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |\n| --- | --- | --- | --- | -...",
+      "company": "Tesla Inc."
     },
     {
-      "query_id": "FIN_04",
-      "query": "What are the latest developments at FinanceInc?",
-      "company": "FinanceInc",
-      "ticker": "FIN",
-      "expected_answer_contains": [
-        "FinanceInc",
-        "news"
-      ],
-      "required_sources": [
-        "news"
-      ],
-      "required_sections": [
-        "Recent Developments"
-      ],
-      "evaluation_type": "contains"
+      "query_id": "SYN_009",
+      "query": "Financial results for the year ended June 30, 2024 compared to June 30, 2023, including revenue, net income, and diluted earnings per share.",
+      "target_chunk_id": "025a1640-783a-56ef-8d9e-2da9aaeb2799",
+      "target_chunk_text": "|  |  |  |  |  |  |  |  |  |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n|  |  |  |  |  |  |  |  |  |\n| (In millions, except per share amounts) |  |  | |  |  |  | |  |\n|  |  |  | |  |  |  ...",
+      "company": "Microsoft Corporation"
     },
     {
-      "query_id": "FIN_05",
-      "query": "Provide a comprehensive due diligence report for FinanceInc",
-      "company": "FinanceInc",
-      "ticker": "FIN",
-      "expected_answer_contains": [
-        "FinanceInc",
-        "revenue",
-        "founded"
-      ],
-      "required_sources": [
-        "sec",
-        "wikipedia",
-        "news"
-      ],
-      "required_sections": [
-        "Company Overview",
-        "Financial Performance",
-        "Recent Developments"
-      ],
-      "evaluation_type": "comprehensive"
+      "query_id": "SYN_010",
+      "query": "Accrued expenses and other current liabilities table",
+      "target_chunk_id": "0053e02e-68e1-54bd-b208-8dc654997470",
+      "target_chunk_text": "Accrued Expenses and Other Current Liabilities\n\nAccrued expenses and other current liabilities consisted of the following (in millions):...",
+      "company": "Alphabet Inc."
     },
     {
-      "query_id": "HLTH_01",
-      "query": "What is HealthPlus?",
-      "company": "HealthPlus",
-      "ticker": "HLTH",
-      "expected_answer_contains": [
-        "HealthPlus",
-        "leading company",
-        "Founded"
-      ],
-      "required_sources": [
-        "wikipedia"
-      ],
-      "required_sections": [
-        "Company Overview"
-      ],
-      "evaluation_type": "contains"
+      "query_id": "SYN_011",
+      "query": "GAAP to non-GAAP reconciliation Item 2",
+      "target_chunk_id": "00c2122c-0816-5b8d-a6e8-af0b1d4bbcfb",
+      "target_chunk_text": "PART I\n\nItem 2\n\nThe following table reconciles our financial results reported in accordance with GAAP to non-GAAP financial results:...",
+      "company": "Microsoft Corporation"
     },
     {
-      "query_id": "HLTH_02",
-      "query": "What was HealthPlus's revenue in Q1 2024?",
-      "company": "HealthPlus",
-      "ticker": "HLTH",
-      "expected_answer_contains": [
-        "revenue",
-        "Q1 2024",
-        "$",
-        "M"
-      ],
-      "required_sources": [
-        "sec"
-      ],
-      "required_sections": [
-        "Financial Performance"
-      ],
-      "evaluation_type": "contains"
+      "query_id": "SYN_012",
+      "query": "costs allocated to segments legal information technology human resources finance excise taxes field selling",
+      "target_chunk_id": "02240556-f8ee-5505-aa01-34c954d8eed5",
+      "target_chunk_text": "PART I\n\nItem 1\n\nIn addition, certain costs are incurred at a corporate level and allocated to our segments. These allocated costs generally include legal, including settlements and fines, information ...",
+      "company": "Microsoft Corporation"
     },
     {
-      "query_id": "HLTH_03",
-      "query": "Analyze HealthPlus's revenue growth over the past year",
-      "company": "HealthPlus",
-      "ticker": "HLTH",
-      "expected_answer_contains": [
-        "growth",
-        "revenue",
-        "%"
-      ],
-      "required_sources": [
-        "sec"
-      ],
-      "required_sections": [
-        "Financial Performance",
-        "Growth Analysis"
-      ],
-      "evaluation_type": "contains"
+      "query_id": "SYN_013",
+      "query": "variable interest entities assets and liabilities elimination intercompany transactions",
+      "target_chunk_id": "02a3d54f-e50d-5a3b-aa01-cb7177811d44",
+      "target_chunk_text": "Note 11 \u2013 Variable Interest Entity Arrangements\n\nThe aggregate carrying values of the variable interest entities\u2019 assets and liabilities, after elimination of any intercompany transactions and balance...",
+      "company": "Tesla Inc."
     },
     {
-      "query_id": "HLTH_04",
-      "query": "What are the latest developments at HealthPlus?",
-      "company": "HealthPlus",
-      "ticker": "HLTH",
-      "expected_answer_contains": [
-        "HealthPlus",
-        "news"
-      ],
-      "required_sources": [
-        "news"
-      ],
-      "required_sections": [
-        "Recent Developments"
-      ],
-      "evaluation_type": "contains"
+      "query_id": "SYN_014",
+      "query": "MyPower customer notes receivable balance September 30 2025 and December 31 2024",
+      "target_chunk_id": "03bedd3c-b1b9-5f1f-b3e9-c5aa2995de34",
+      "target_chunk_text": "As of September 30, 2025 and December 31, 2024, the total outstanding balance of MyPower customer notes receivable, net of allowance for expected credit losses, was $243 million and $248 million, resp...",
+      "company": "Tesla Inc."
     },
     {
-      "query_id": "HLTH_05",
-      "query": "Provide a comprehensive due diligence report for HealthPlus",
-      "company": "HealthPlus",
-      "ticker": "HLTH",
-      "expected_answer_contains": [
-        "HealthPlus",
-        "revenue",
-        "founded"
-      ],
-      "required_sources": [
-        "sec",
-        "wikipedia",
-        "news"
-      ],
-      "required_sections": [
-        "Company Overview",
-        "Financial Performance",
-        "Recent Developments"
-      ],
-      "evaluation_type": "comprehensive"
+      "query_id": "SYN_015",
+      "query": "ASU No. 2023-08 crypto assets accounting disclosure 2024 recast",
+      "target_chunk_id": "04a85346-d289-5b1d-b5fa-fdee72a1ffe2",
+      "target_chunk_text": "(1)As a result of the adoption of ASU No. 2023-08, Accounting for and Disclosure of Crypto Assets, the previously reported quarterly period in 2024 has been recast. See Recent Accounting Pronouncement...",
+      "company": "Tesla Inc."
+    },
+    {
+      "query_id": "SYN_016",
+      "query": "Equity securities sold total sale price March 31, 2023 March 31, 2024",
+      "target_chunk_id": "0363104e-6b4d-5134-8bbb-aee3b88022ac",
+      "target_chunk_text": "|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- ...",
+      "company": "Alphabet Inc."
+    },
+    {
+      "query_id": "SYN_017",
+      "query": "Derivative assets and liabilities level 1, level 2, level 3 March 31 2024 June 30 2023",
+      "target_chunk_id": "03379151-7b0a-5d2f-bc8a-2fc59c834a17",
+      "target_chunk_text": "|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\n|  |  |  |  |  |  |  |  |  |  |  |  |  |  |...",
+      "company": "Microsoft Corporation"
+    },
+    {
+      "query_id": "SYN_018",
+      "query": "Operating lease cost 2021 2022 2023",
+      "target_chunk_id": "035a5215-2eb8-51ee-8459-9f92e606f5d7",
+      "target_chunk_text": "|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\n|  |  |  |  |  |  |  |  |  |  |  |...",
+      "company": "Alphabet Inc."
+    },
+    {
+      "query_id": "SYN_019",
+      "query": "What was Microsoft's effective tax rate for the three months ended March 31, 2024 and 2023, and what were the primary reasons for the change?",
+      "target_chunk_id": "041f823a-ffc2-5161-a0b1-6d59b8165135",
+      "target_chunk_text": "NOTE 11 \u2014 INCOME TAXES\n\nEffective Tax Rate\n\nOur effective tax rate was 18% and 19% for the three months ended March 31, 2024 and 2023, respectively, and 18% and 19% for the nine months ended March 31,...",
+      "company": "Microsoft Corporation"
+    },
+    {
+      "query_id": "SYN_020",
+      "query": "impairment of intangible assets 2025 2024 2023 residual value",
+      "target_chunk_id": "038f9e88-366e-5514-b78e-8a8228359856",
+      "target_chunk_text": "No material impairments of intangible assets were identified during fiscal years 2025, 2024, or 2023. We estimate that we have no significant residual value related to our intangible assets.\n\n71...",
+      "company": "Microsoft Corporation"
     }
   ]
 }
