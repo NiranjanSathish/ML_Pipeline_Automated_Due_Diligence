@@ -1,0 +1,35 @@
+{
+  "bias_passed": false,
+  "global": {
+    "global_avg_overall_score": 0.5030748427545335,
+    "global_avg_success_rate": 0.39999999999999997,
+    "max_group_avg_score": 0.7746031746031746,
+    "min_group_avg_score": 0.0,
+    "max_gap": 0.7746031746031746,
+    "max_allowed_gap": 0.2,
+    "min_group_score_threshold": 0.6
+  },
+  "per_group": {
+    "TECH": {
+      "num_tests": 5,
+      "num_success": 5,
+      "success_rate": 1.0,
+      "avg_overall_score": 0.734621353660426,
+      "avg_groundedness": 0.546642077162516
+    },
+    "FIN": {
+      "num_tests": 5,
+      "num_success": 1,
+      "success_rate": 0.2,
+      "avg_overall_score": 0.7746031746031746,
+      "avg_groundedness": 0.6507936507936508
+    },
+    "HLTH": {
+      "num_tests": 5,
+      "num_success": 0,
+      "success_rate": 0.0,
+      "avg_overall_score": 0.0,
+      "avg_groundedness": 0.0
+    }
+  }
+}
