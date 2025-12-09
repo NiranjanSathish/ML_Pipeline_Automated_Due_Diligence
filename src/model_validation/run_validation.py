@@ -273,7 +273,6 @@ class ValidationPipeline:
             'all_criteria_met': all_passed,
             'criteria': criteria,
             'summary': summary,
-            'acceptance_criteria': acceptance,
             'detailed_results': self.results
         }
     
