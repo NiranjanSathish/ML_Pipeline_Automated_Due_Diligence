@@ -92,7 +92,7 @@ jobs:
         
     - name: Upload Bias Report
       if: always()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: bias-report
         path: src/model_validation/bias_report.json
