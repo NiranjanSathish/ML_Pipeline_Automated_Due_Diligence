@@ -1,0 +1,69 @@
+name: CD Pipeline
+
+on:
+  push:
+    branches: [ "**" ]
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  GAR_LOCATION: us-central1
+  REPOSITORY: agents-repo
+  IMAGE: agent-api
+  GKE_CLUSTER: agent-cluster
+  GKE_ZONE: us-central1-a
+
+jobs:
+  build-push-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    # Authenticate via key
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        credentials_json: '${{ secrets.GCP_SA_KEY }}'
+
+    # Setup gcloud
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v1
+
+    # Configure Docker for GAR
+    - name: Configure Docker
+      run: |
+        gcloud auth configure-docker ${{ env.GAR_LOCATION }}-docker.pkg.dev
+
+    # Build and Push
+    - name: Build and Push Container
+      run: |
+        docker build -t ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ github.sha }} .
+        docker push ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ github.sha }}
+        
+        # Also push latest
+        docker tag ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ github.sha }} ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:latest
+        docker push ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:latest
+
+    # Deploy to GKE
+    - name: Deploy to GKE
+      id: deploy
+      run: |
+        # Get Cluster Credentials
+        gcloud container clusters get-credentials ${{ env.GKE_CLUSTER }} --zone ${{ env.GKE_ZONE }} --project ${{ env.PROJECT_ID }}
+        
+        # Update Image
+        kubectl set image deployment/agent-api agent-api=${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ github.sha }}
+        
+        # Wait for rollout
+        if ! kubectl rollout status deployment/agent-api --timeout=60s; then
+            echo "❌ Deployment failed!"
+            exit 1
+        fi
+        
+    # Rollback on Failure
+    - name: Rollback
+      if: failure() && steps.deploy.outcome == 'failure'
+      run: |
+        echo "⚠️ Rolling back deployment..."
+        gcloud container clusters get-credentials ${{ env.GKE_CLUSTER }} --zone ${{ env.GKE_ZONE }} --project ${{ env.PROJECT_ID }}
+        kubectl rollout undo deployment/agent-api
+        echo "✅ Rollback initiated."
