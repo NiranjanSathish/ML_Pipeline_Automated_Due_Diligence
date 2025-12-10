@@ -115,13 +115,24 @@ class ValidationPipeline:
             metrics['hallucination_score'] = final_state.get('hallucination_score', 0.0)
             metrics['iterations'] = final_state.get('iteration', 1)
             
-            # Check for retrieval hit (Recall@k)
+            # Check Weighted Recall (Text Similarity)
             target_chunk_id = test_case.get('target_chunk_id')
-            if target_chunk_id:
-                # Check both research_data (all candidates) and sources (final used)
-                # chunks from hybrid_search have 'chunk_id' field from payload
-                retrieved_ids = [str(c.get('chunk_id') or c.get('id', '')) for c in retrieved_chunks]
-                metrics['retrieval_hit'] = 1 if str(target_chunk_id) in retrieved_ids else 0
+            target_text = test_case.get('target_chunk_text', '')
+            if target_text.endswith("..."):
+                target_text = target_text[:-3]
+                
+            if target_chunk_id or target_text:
+                from difflib import SequenceMatcher
+                max_similarity = 0.0
+                
+                for c in retrieved_chunks:
+                    c_text = c.get('raw_chunk') or c.get('text') or c.get('content') or ""
+                    if not c_text: continue
+                    sim = SequenceMatcher(None, target_text, c_text).ratio()
+                    if sim > max_similarity:
+                        max_similarity = sim
+                
+                metrics['retrieval_hit'] = max_similarity
             
             print(f"\n✅ Test completed in {elapsed_time:.2f}s")
             print(f"📈 Overall Score: {metrics['overall_score']:.2%}")

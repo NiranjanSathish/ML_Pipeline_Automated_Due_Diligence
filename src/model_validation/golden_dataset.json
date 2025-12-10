@@ -4,50 +4,50 @@
   "test_cases": [
     {
       "query_id": "ALPHABETIN_001",
-      "query": "Alphabet Inc. $74.8 billion remained available Class A Class C share repurchases September 30, 2025",
-      "target_chunk_id": "GOOGL_sec_f5608956_156",
-      "target_chunk_text": "\u20ac1.25 billion of 4.00% notes due 2054. The net proceeds from all notes issued in May 2025 are used for general corporate purposes.\n\nAs of September 30, 2025, we had senior unsecured notes outstanding ...",
+      "query": "Alphabet Inc. marketable and non-marketable equity securities carrying value December 31 2023 and December 31 2024",
+      "target_chunk_id": "GOOGL_sec_416a494b_167",
+      "target_chunk_text": "|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- ...",
       "company": "Alphabet Inc.",
-      "golden_answer": "As of September 30, 2025, $74.8 billion remained available for Alphabet Inc.'s Class A and Class C share repurchases.",
+      "golden_answer": "As of December 31, 2023, the carrying value for marketable equity securities was $5,973 million and for non-marketable equity securities was $28,766 million. As of December 31, 2024, these values were $5,079 million and $35,531 million, respectively.",
       "metadata": {
-        "sector": "Consumer Discretionary",
+        "sector": "Technology",
         "market_cap": "Large Cap",
         "region": "North America"
       }
     },
     {
-      "query_id": "ALPHABETIN_002",
-      "query": "Alphabet Inc. debt maturity schedule June 30 2024",
-      "target_chunk_id": "GOOGL_sec_40245511_31",
-      "target_chunk_text": "|  |  |  |  |  |  |\n| --- | --- | --- | --- | --- | --- |\n|  |  |  |  |  |  |\n|  | | | As of June 30, 2024 | | |\n| Due in 1 year or less | | | $ | 7,234 |  |\n| Due in 1 year through 5 years | | | 36,6...",
-      "company": "Alphabet Inc.",
-      "golden_answer": "As of June 30, 2024, Alphabet Inc.'s debt maturity schedule is: $7,234 million due in 1 year or less, $36,666 million due in 1-5 years, $11,977 million due in 5-10 years, and $12,664 million due after 10 years, totaling $68,541 million.",
+      "query_id": "APPLEINC_002",
+      "query": "Apple Inc. stock upgraded to hold solid Q4 results robust sales growth",
+      "target_chunk_id": "AAPL_news_1a5fc9e7_0",
+      "target_chunk_text": "In late August, I provided an update on Apple Inc. (AAPL) and upgraded the stock to a hold, as there were signs that their business had hit an inflection point. As shown below, that update was quite t...",
+      "company": "Apple Inc.",
+      "golden_answer": "Apple Inc. stock was upgraded to a hold in late August. This upgrade was followed by Apple delivering solid Q4 results with robust sales growth.",
       "metadata": {
         "sector": "Energy",
-        "market_cap": "Small Cap",
+        "market_cap": "Large Cap",
         "region": "North America"
       }
     },
     {
       "query_id": "MICROSOFTC_003",
-      "query": "Microsoft Corporation income taxes effective tax rate Notice 2023-55 Notice 2023-80 IRS NOPAs $28.9 billion",
-      "target_chunk_id": "MSFT_sec_1ed8438a_70",
-      "target_chunk_text": "NOTE 11 \u2014 INCOME TAXES\n\nEffective Tax Rate\n\nOur effective tax rate was 18% and 19% for the three months ended March 31, 2024 and 2023, respectively, and 18% and 19% for the nine months ended March 31,...",
+      "query": "Microsoft Corporation IRS NOPAs $28.9 billion intercompany transfer pricing",
+      "target_chunk_id": "MSFT_sec_ee77f419_105",
+      "target_chunk_text": "PART I\n\nItem 2\n\nUncertain Tax Positions\n\nWe remain under audit by the IRS for tax years 2014 to 2017. With respect to the audit for tax years 2004 to 2013, on September 26, 2023, we received Notices o...",
       "company": "Microsoft Corporation",
-      "golden_answer": "Microsoft's effective tax rate was 18% for the three and nine months ended March 31, 2024, partly due to tax benefits from IRS Notice 2023-55 and Notice 2023-80. The company received IRS NOPAs on September 26, 2023, seeking an additional tax payment of $28.9 billion plus penalties and interest related to intercompany transfer pricing for tax years 2004 to 2013.",
+      "golden_answer": "On September 26, 2023, Microsoft Corporation received Notices of Proposed Adjustment (NOPAs) from the IRS, primarily related to intercompany transfer pricing. The IRS is seeking an additional tax payment of $28.9 billion plus penalties and interest, which Microsoft disagrees with and plans to contest.",
       "metadata": {
-        "sector": "Energy",
-        "market_cap": "Large Cap",
+        "sector": "Technology",
+        "market_cap": "Small Cap",
         "region": "North America"
       }
     },
     {
-      "query_id": "AMAZONCOMI_004",
-      "query": "Amazon.com Inc. net sales North America International AWS year-over-year growth net sales mix June 30 2024",
-      "target_chunk_id": "AMZN_sec_c3cc1645_73",
-      "target_chunk_text": "|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- ...",
-      "company": "Amazon.com Inc.",
-      "golden_answer": "For the three months ended June 30, 2024, Amazon.com Inc. reported North America net sales of $90,033 million, International net sales of $31,663 million, and AWS net sales of $26,281 million. Year-over-year growth was 9% for North America, 7% for International, and 19% for AWS, with the net sales mix being 61% North America, 21% International, and 18% AWS.",
+      "query_id": "APPLEINC_004",
+      "query": "Apple Inc. forward-looking statements fiscal years ended in September www.apple.com investor.apple.com",
+      "target_chunk_id": "AAPL_sec_52219103_42",
+      "target_chunk_text": "Item 2. Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations\n\nThis Item and other sections of this Quarterly Report on Form 10-Q (\u201cForm 10-Q\u201d) contain forward-looking ...",
+      "company": "Apple Inc.",
+      "golden_answer": "Apple Inc.'s forward-looking statements are defined as current expectations of future events, not guarantees of performance, and are identified by specific terms. The Company's fiscal years end in September, and investor information is available on www.apple.com and investor.apple.com.",
       "metadata": {
         "sector": "Energy",
         "market_cap": "Small Cap",
@@ -56,14 +56,14 @@
     },
     {
       "query_id": "MICROSOFTC_005",
-      "query": "Microsoft Corporation Revenue allocated to remaining performance obligations $229 billion December 31, 2023 NOTE 13 LEASES datacenters corporate offices",
-      "target_chunk_id": "MSFT_sec_9da97981_73",
-      "target_chunk_text": "Revenue allocated to remaining performance obligations, which includes unearned revenue and amounts that will be invoiced and recognized as revenue in future periods, was $229 billion as of December 3...",
+      "query": "Microsoft Corporation Sales and marketing expenses include payroll employee benefits stock-based compensation expense Three Months Ended March 31, 2025 Sales and marketing expenses were relatively unchanged",
+      "target_chunk_id": "MSFT_sec_0e22b28d_128",
+      "target_chunk_text": "Sales and marketing expenses include payroll, employee benefits, stock-based compensation expense, and other headcount-related expenses associated with sales and marketing personnel, and the costs of ...",
       "company": "Microsoft Corporation",
-      "golden_answer": "Microsoft Corporation's revenue allocated to remaining performance obligations was $229 billion as of December 31, 2023. The provided text does not state that this revenue is allocated to or derived from leases for datacenters or corporate offices, which are discussed separately under Note 13.",
+      "golden_answer": "Microsoft Corporation's Sales and marketing expenses include payroll, employee benefits, stock-based compensation expense, and other headcount-related expenses, as well as advertising, promotions, trade shows, seminars, and other programs. For the Three Months Ended March 31, 2025, these expenses were relatively unchanged.",
       "metadata": {
-        "sector": "Energy",
-        "market_cap": "Large Cap",
+        "sector": "Consumer Discretionary",
+        "market_cap": "Small Cap",
         "region": "North America"
       }
     }

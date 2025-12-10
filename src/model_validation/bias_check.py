@@ -75,16 +75,39 @@ class BiasChecker:
                     test_case=case
                 )
                 
-                # Check Recall@k (Retrieval Hit)
-                target_id = case.get('target_chunk_id')
-                # Check in research_data (all retrieved)
-                # chunks from hybrid_search have 'chunk_id' field from payload
-                retrieved_ids = [str(r.get('chunk_id') or r.get('id', '')) for r in retrieved_chunks]
-                # Also check in sources (used in context) - stronger signal
-                used_ids = [str(s.get('chunk_id') or s.get('id', '')) for s in sources]
+                # Check Weighted Recall (Text Similarity)
+                # Instead of binary ID match, we check max text similarity (Soft Recall)
+                from difflib import SequenceMatcher
                 
-                hit = 1 if str(target_id) in retrieved_ids else 0
-                used_hit = 1 if str(target_id) in used_ids else 0
+                target_text = case.get('target_chunk_text', '')
+                # Remove "..." if present from truncation
+                if target_text.endswith("..."):
+                    target_text = target_text[:-3]
+                
+                max_similarity = 0.0
+                
+                for r in retrieved_chunks:
+                     # chunk text might be in 'raw_chunk' or 'text' or 'content'
+                     r_text = r.get('raw_chunk') or r.get('text') or r.get('content') or ""
+                     if not r_text: continue
+                     
+                     # Check similarity
+                     sim = SequenceMatcher(None, target_text, r_text).ratio()
+                     if sim > max_similarity:
+                         max_similarity = sim
+                
+                # Use this as the hit score (0.0 to 1.0)
+                hit = max_similarity
+                
+                # Check used_hit similarly (optional, but good for consistency)
+                max_used_sim = 0.0
+                for s in sources:
+                     s_text = s.get('raw_chunk') or s.get('text') or s.get('content') or ""
+                     if not s_text: continue
+                     sim = SequenceMatcher(None, target_text, s_text).ratio()
+                     if sim > max_used_sim:
+                         max_used_sim = sim
+                used_hit = max_used_sim
                 
                 # Store Result
                 result = {

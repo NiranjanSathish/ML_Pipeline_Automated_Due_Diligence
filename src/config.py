@@ -39,7 +39,7 @@ EMBEDDING_CONFIG = {
 LLM_CONFIG = {
     "provider": "vertex",
     "base_url": "http://localhost:11434",
-    "model": "gemini-2.5-flash", # Latest Stable (June 2025)
+    "model": "gemini-2.5-pro", # Latest Stable (June 2025)
     "embedding_model": "text-embedding-004"
 }
 

@@ -1,166 +1,149 @@
-# Market Due Diligence AI (Agentic RAG) 🤖 📈
+# Market Due Diligence AI Agent (Agentic RAG) 
 
-A production-grade Multi-Agent AI system for financial analysis, powered by **LangGraph**, **FastAPI**, **Streamlit**, and **Google Vertex AI**.
+A production-grade, autonomous multi-agent system for financial analysis, powered by **LangGraph**, **FastAPI**, **Streamlit**, and **Google Vertex AI**.
 
-This system autonomously:
-1.  **Deconstructs** complex queries (Planner Agent).
-2.  **Researches** live data from SEC filings, News, and Wikipedia (Researcher Agent).
-3.  **Synthesizes** findings into a professional report (Synthesiser Agent).
-4.  **Validates** accuracy and hallucinations (Evaluator Agent).
+## Deployment Automation & CI/CD
+
+This project features a fully automated **CI/CD Pipeline** using **GitHub Actions**, removing the need for manual deployments.
+
+### The Deployment Pipeline (`.github/workflows/ci-cd.yaml`)
+Every push to any branch triggers the following sequential pipeline:
+
+#### **Stage 1: Continuous Integration (CI)**
+- **Syntax Checks**: Runs `flake8` to ensure code quality.
+- **Unit Tests**: Runs `pytest` to verify logic.
+- **Model Validation & Bias Check**:
+  - Runs the **Evaluator Agent** against a Golden Dataset.
+  - **Bias Threshold**: The pipeline **FAILS** if the Global Quality Score is below **0.2**.
+  - **Metrics**: Checks Factual Accuracy, Groundedness, Answer Relevancy, and Soft Recall.
+
+#### **Stage 2: Continuous Deployment (CD) - Backend API**
+- **Trigger**: Automatic (only if Stage 1 passes).
+- **Build**: Builds parameters-optimized Docker Image (`agent-api`).
+- **Push**: Pushes image to **Google Artifact Registry (GAR)**.
+- **Deploy**: Updates **Google Kubernetes Engine (GKE)** cluster `agent-cluster`.
+- **Zero-Downtime Rollback**: If the new deployment fails health checks, it **automatically rolls back** to the previous stable version.
+
+#### **Stage 3: Continuous Deployment (CD) - Frontend UI**
+- **Trigger**: Automatic (only if Stage 1 passes).
+- **Build**: Builds Streamlit UI Image (`agent-ui`).
+- **Deploy**: Deploys to **Google Cloud Run** as a serverless service.
+- **Access**: Publicly accessible via the Cloud Run URL.
+
+#### **Stage 4: Notification**
+- **Email Alert**: Sends a confirmation email with deployment details upon success.
 
 ---
 
-## ⚡ Quick Start (For Developers)
+## Architecture & Tech Stack
+
+- **Orchestration**: LangGraph (Stateful Multi-Agent Graph)
+- **Agents**:
+  - **Planner**: Deconstructs complex queries.
+  - **Researcher**: Fetches data from Qdrant & External Tools.
+  - **Synthesizer**: Compiles final reports.
+  - **Evaluator**: Validates output quality.
+- **Vector DB**: Qdrant (Hybrid Search).
+- **LLM**: Google Vertex AI (Gemini Pro).
+- **Backend**: FastAPI.
+- **Frontend**: Streamlit.
+- **Infrastructure**: GKE (API), Cloud Run (UI), GAR (Registry).
+
+---
+
+## Setup & Local Development
 
 ### 1. Prerequisites
-*   **Python 3.10+**
-*   **Google Cloud SDK** (For deployment)
-*   **Docker** (For containerization)
+- Python 3.10+
+- Docker
+- Google Cloud SDK
 
-### 2. Setup Environment
-```bash
-# 1. Clone & Enter
-git clone <repo_url>
-cd agents-repo
-
-# 2. Create Virtual Env
-python -m venv .venv
-source .venv/bin/activate
-
-# 3. Install Dependencies
-pip install -r requirements.txt
-```
-
-### 3. Configure Secrets (`.env`)
+### 2. Environment Configuration
 Create a `.env` file in the root directory:
 ```properties
-# Google Cloud (Required)
+# Google Cloud
+GCP_PROJECT_ID=coherent-rite-473622-j0
+GCP_LOCATION=us-central1
 GOOGLE_APPLICATION_CREDENTIALS=vertex-key.json
-PROJECT_ID=coherent-rite-473622-j0
-LOCATION=us-central1
 
-# Vector Database (Qdrant)
-QDRANT_URL=https://your-qdrant-cluster.qdrant.tech
-QDRANT_API_KEY=your-qdrant-key
+# Vector DB
+QDRANT_URL=https://your-qdrant-url
+QDRANT_API_KEY=your-api-key
+QDRANT_COLLECTION_NAME=financial_data
+
+# LLMFlow
+OPENAI_API_KEY=sk-... (If used)
 ```
-*Make sure `vertex-key.json` is present in the root folder!*
 
----
-
-## 🤝 For New Developers (Handoff Guide)
-
-## 🤝 For New Developers (Handoff Guide)
-
-**If you just received this code folder, follow these steps:**
-
-### Step 1: Get the Keys 🔑
-Ask the previous owner (Saumith) for:
-1.  `vertex-key.json` (Google Cloud Service Account Key)
-2.  `.env` file (API Keys)
-*Place these in the root folder.*
-
-### Step 2: Choose Your Path
-
-**Option A: "I just want to RUN it" (No Install Needed) 🐳**
-If you have Docker, you don't need to install Python or libraries. Just run:
+### 3. Running Locally
+You can run the full stack using Docker directly:
 ```bash
-# Terminal 1: Backend
+# Backend (Port 8080)
 docker run -p 8080:8080 --env-file .env us-central1-docker.pkg.dev/coherent-rite-473622-j0/agents-repo/agent-api:v2
 
-# Terminal 2: Frontend
-docker run -p 8501:8501 us-central1-docker.pkg.dev/coherent-rite-473622-j0/agents-repo/agent-ui:v1
-```
-*Access App at http://localhost:8501*
-
-**Option B: "I want to EDIT the code" (Developer Mode) 💻**
-To change the code, you need Python:
-1.  Create Env: `python -m venv .venv && source .venv/bin/activate`
-2.  Install: `pip install -r requirements.txt`
-3.  Run:
-    *   `uvicorn src.api:api --reload --port 8080`
-    *   `streamlit run src/ui/app.py`
-
----
-
----
-
-## 🚀 Running Locally
-
-You can run the full stack (UI + Backend) on your machine.
-
-**Terminal 1: The Backend (API)**
-```bash
-uvicorn src.api:api --reload --port 8080
-```
-*Test it: Open http://localhost:8080/docs*
-
-**Terminal 2: The Frontend (UI)**
-```bash
-streamlit run src/ui/app.py
-```
-*Access App: http://localhost:8501*
-
-### Option 2: Run with Docker (Cleaner)
-If you don't want to install Python dependencies, you can run the Docker image directly:
-
-```bash
-# Backend
-docker run -p 8080:8080 --env-file .env us-central1-docker.pkg.dev/coherent-rite-473622-j0/agents-repo/agent-api:v2
-
-# Frontend
+# Frontend (Port 8501)
 docker run -p 8501:8501 us-central1-docker.pkg.dev/coherent-rite-473622-j0/agents-repo/agent-ui:v1
 ```
 
 ---
 
-## ☁️ Cloud Deployment
+## GitHub Secrets Configuration
+
+For the **CI/CD Pipeline** to work, you must configure the following **Secrets** in your GitHub Repository:
+
+| Secret Name | Description |
+|---|---|
+| `GCP_SA_KEY` | Service Account JSON Key (Admin Access) |
+| `GCP_PROJECT_ID` | Google Cloud Project ID |
+| `QDRANT_URL` | Qdrant Cluster URL |
+| `QDRANT_API_KEY` | Qdrant API Key |
+| `QDRANT_COLLECTION_NAME` | Collection Name |
+| `EMAIL_HOST` | SMTP Server (e.g., smtp.gmail.com) |
+| `EMAIL_PORT` | SMTP Port (e.g., 587) |
+| `EMAIL_USERNAME` | Sender Email |
+| `EMAIL_PASSWORD` | App Password (Not Login Password) |
+| `EMAIL_FROM` | Sender Address |
+| `EMAIL_TO` | Notification Recipient |
+
+---
+
+## Verifying Deployment
+
+After a successful pipeline run:
 
 ### 1. Backend API (GKE)
-The backend runs on Google Kubernetes Engine (GKE) for high availability.
-
+Check the status of the Kubernetes Service:
 ```bash
-# 1. Build Backend Image (Use --no-cache if debugging)
-docker build --no-cache --platform linux/amd64 -t us-central1-docker.pkg.dev/coherent-rite-473622-j0/agents-repo/agent-api:v2 .
-
-# 2. Push to Registry
-docker push us-central1-docker.pkg.dev/coherent-rite-473622-j0/agents-repo/agent-api:v2
-
-# 3. Update Kubernetes Deployment
-kubectl set image deployment/agent-api agent-api=us-central1-docker.pkg.dev/coherent-rite-473622-j0/agents-repo/agent-api:v2
+kubectl get service agent-api-service
+```
+Use the `EXTERNAL-IP` to test the API:
+```bash
+curl -X POST "http://<EXTERNAL-IP>/v1/research" \
+     -H "Content-Type: application/json" \
+     -d '{"query": "Analyze Microsoft revenue", "complexity": "simple"}'
 ```
 
 ### 2. Frontend UI (Cloud Run)
-The frontend runs on Cloud Run (Serverless) for cost efficiency.
-
-```bash
-# 1. Build Frontend Image (Dockerfile.frontend)
-docker build -f Dockerfile.frontend --platform linux/amd64 -t us-central1-docker.pkg.dev/coherent-rite-473622-j0/agents-repo/agent-ui:v1 .
-
-# 2. Push to Registry
-docker push us-central1-docker.pkg.dev/coherent-rite-473622-j0/agents-repo/agent-ui:v1
-
-# 3. Deploy to Cloud Run
-gcloud run deploy agent-ui \
-    --image us-central1-docker.pkg.dev/coherent-rite-473622-j0/agents-repo/agent-ui:v1 \
-    --platform managed \
-    --region us-central1 \
-    --allow-unauthenticated \
-    --port 8501
-```
+1. Go to **Google Cloud Console > Cloud Run**.
+2. Find the `agent-ui` service.
+3. Click the **URL** to open the web application.
 
 ---
 
-## 📂 Project Structure
-
-*   `src/agents/`: Core logic for the 5 agents (Planner, Researcher, etc.).
-*   `src/ui/`: Streamlit Application (Chat Interface + Admin Dashboard).
-*   `src/graph.py`: LangGraph state machine definition.
-*   `k8s/`: Kubernetes deployment manifests.
-*   `Dockerfile`: Production container config.
-
-## 🛠 Troubleshooting
-
-*   **UI shows "Connection Timeout"**: 
-    *   The complex queries might take >120s. The UI handles this gracefully now.
-*   **Admin Dashboard shows "404"**:
-    *   This means the backend is running an old image. Run the **Cloud Deployment** steps above to push a new tag (`v2`, `v3`...) to force an update.
+## Project Structure
+```
+.
+├── .github/workflows/     # CI/CD Pipelines
+│   └── ci-cd.yaml        # Main Unified Pipeline
+├── k8s/                   # Kubernetes Manifests
+├── src/
+│   ├── agents/           # Agent Logic (Planner, Researcher...)
+│   ├── model_validation/ # Validator & Bias Check Scripts
+│   ├── tools/            # GCP & Qdrant Clients
+│   ├── ui/               # Streamlit App
+│   ├── api.py            # FastAPI Backend
+│   └── graph.py          # LangGraph Definition
+├── Dockerfile            # Backend Image
+├── Dockerfile.frontend   # UI Image
+└── requirements.txt      # Dependencies
+```

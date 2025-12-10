@@ -33,6 +33,20 @@ jobs:
       run: |
         gcloud auth configure-docker ${{ env.GAR_LOCATION }}-docker.pkg.dev
 
+    # Create Secrets Files for Docker Build
+    - name: Create Secrets Files
+      run: |
+        # Create vertex-key.json from secret
+        echo '${{ secrets.GCP_SA_KEY }}' > vertex-key.json
+        
+        # Create .env from secrets
+        echo "GCP_PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}" > .env
+        echo "QDRANT_URL=${{ secrets.QDRANT_URL }}" >> .env
+        echo "QDRANT_API_KEY=${{ secrets.QDRANT_API_KEY }}" >> .env
+        echo "QDRANT_COLLECTION_NAME=${{ secrets.QDRANT_COLLECTION_NAME }}" >> .env
+        echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
+        echo "GOOGLE_APPLICATION_CREDENTIALS=/app/vertex-key.json" >> .env
+        
     # Build and Push
     - name: Build and Push Container
       run: |
