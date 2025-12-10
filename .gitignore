@@ -26,6 +26,11 @@ Saumith_Models_2/
 DEVIL_IS_NEAR/
 DEVIL_IS_NEAR.zip
 
+# GitHub Actions
+.github/workflows/pipeline.yaml
+.github/workflows/ci.yaml
+.github/workflows/cd.yaml
+
 # Virtual Environment
 venv/
 Agent.venv/
