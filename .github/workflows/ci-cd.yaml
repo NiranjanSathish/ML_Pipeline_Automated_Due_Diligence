@@ -215,3 +215,33 @@ jobs:
           --platform managed \
           --allow-unauthenticated \
           --port 8501
+
+  # =================================================================================
+  # JOB 5: NOTIFICATION
+  # =================================================================================
+  notification:
+    needs: [deploy-api-gke, build-deploy-ui]
+    runs-on: ubuntu-latest
+    if: success() # Only run if deployments succeeded
+    steps:
+      - name: Send Email Notification
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.EMAIL_HOST }}
+          server_port: ${{ secrets.EMAIL_PORT }}
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "✅ Deployment Successful: ${{ github.repository }} - ${{ github.sha }}"
+          body: |
+            Deployment completed successfully!
+            
+            Repository: ${{ github.repository }}
+            Commit: ${{ github.sha }}
+            Branch: ${{ github.ref_name }}
+            
+            API Image: ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.API_IMAGE }}:${{ github.sha }}
+            UI Image: ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.UI_IMAGE }}:${{ github.sha }}
+            
+            View Action: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          to: ${{ secrets.EMAIL_TO }}
+          from: ${{ secrets.EMAIL_FROM }}
