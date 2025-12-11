@@ -161,7 +161,7 @@ jobs:
         # Update to the specific image SHA
         kubectl set image deployment/agent-api agent-api=${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.API_IMAGE }}:${{ github.sha }}
         
-        if ! kubectl rollout status deployment/agent-api --timeout=60s; then
+        if ! kubectl rollout status deployment/agent-api --timeout=300s; then
             echo "❌ Deployment failed! Dumping pod info..."
             kubectl get pods
             kubectl describe deployment/agent-api
