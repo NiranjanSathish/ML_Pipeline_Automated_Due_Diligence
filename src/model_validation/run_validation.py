@@ -58,21 +58,22 @@ class ValidationPipeline:
         
         print(f"✅ Loaded {len(self.test_cases)} test cases")
         
-        # Import Graph
-        try:
-            from src.graph import app
-            self.graph_app = app
-            print("✅ Agent Graph loaded")
-        except ImportError as e:
-            print(f"❌ Failed to load Agent Graph: {e}")
-            raise
-
+        # Initialize agent system
+        print("\n🔧 Initializing agents...")
+        self.search_engine = HybridSearchEngine()
+        self.reranker = Reranker()
+        self.analyser = AnalyserAgent()
+        self.researcher = ResearcherAgent(self.search_engine, self.reranker)
+        self.synthesiser = SynthesiserAgent()
+        
+        print("✅ Agents initialized")
+        
         # Results storage
         self.results = []
         
     def run_single_test(self, test_case: Dict) -> Dict:
         """
-        Run agent graph on single test case and evaluate
+        Run agent pipeline on single test case and evaluate
         """
         query_id = test_case['query_id']
         query = test_case['query']
@@ -85,19 +86,26 @@ class ValidationPipeline:
         start_time = time.time()
         
         try:
-            # Invoke Graph
-            print("\n🤖 Invoking Agent Graph...")
-            final_state = self.graph_app.invoke({"query": query})
+            # Step 1: Analyser decomposes query
+            print("\n[1/3] Analyser: Decomposing query...")
+            sub_queries = self.analyser.execute(query)
             
-            answer = final_state.get('answer', "")
-            sources = final_state.get('sources', [])
-            confidence = final_state.get('confidence', 0.0)
-            retrieved_chunks = final_state.get('research_data', [])
+            # Step 2: Researcher retrieves information
+            print("\n[2/3] Researcher: Retrieving information...")
+            retrieved_chunks = self.researcher.execute(sub_queries)
+            
+            # Step 3: Synthesiser generates answer
+            print("\n[3/3] Synthesiser: Generating answer...")
+            result = self.synthesiser.execute(query, retrieved_chunks)
+            
+            answer = result['answer']
+            sources = result['sources']
+            confidence = result['confidence']
             
             elapsed_time = time.time() - start_time
             
-            # Compute metrics (rule-based)
-            print("\n📊 Computing metrics...")
+            # Compute metrics (all rule-based, very fast)
+            print("\n📊 Computing metrics (rule-based)...")
             metrics = compute_all_metrics(
                 query=query,
                 answer=answer,
@@ -112,27 +120,12 @@ class ValidationPipeline:
             metrics['num_retrieved_chunks'] = len(retrieved_chunks)
             metrics['num_sources'] = len(sources)
             metrics['status'] = 'success'
-            metrics['hallucination_score'] = final_state.get('hallucination_score', 0.0)
-            metrics['iterations'] = final_state.get('iteration', 1)
             
-            # Check Weighted Recall (Text Similarity)
+            # Check for retrieval hit (Recall@k)
             target_chunk_id = test_case.get('target_chunk_id')
-            target_text = test_case.get('target_chunk_text', '')
-            if target_text.endswith("..."):
-                target_text = target_text[:-3]
-                
-            if target_chunk_id or target_text:
-                from difflib import SequenceMatcher
-                max_similarity = 0.0
-                
-                for c in retrieved_chunks:
-                    c_text = c.get('raw_chunk') or c.get('text') or c.get('content') or ""
-                    if not c_text: continue
-                    sim = SequenceMatcher(None, target_text, c_text).ratio()
-                    if sim > max_similarity:
-                        max_similarity = sim
-                
-                metrics['retrieval_hit'] = max_similarity
+            if target_chunk_id:
+                retrieved_ids = [c.get('id') for c in retrieved_chunks]
+                metrics['retrieval_hit'] = 1 if target_chunk_id in retrieved_ids else 0
             
             print(f"\n✅ Test completed in {elapsed_time:.2f}s")
             print(f"📈 Overall Score: {metrics['overall_score']:.2%}")
@@ -144,8 +137,6 @@ class ValidationPipeline:
             
         except Exception as e:
             print(f"\n❌ Test failed: {e}")
-            import traceback
-            traceback.print_exc()
             elapsed_time = time.time() - start_time
             
             return {
@@ -284,6 +275,7 @@ class ValidationPipeline:
             'all_criteria_met': all_passed,
             'criteria': criteria,
             'summary': summary,
+            'acceptance_criteria': acceptance,
             'detailed_results': self.results
         }
     

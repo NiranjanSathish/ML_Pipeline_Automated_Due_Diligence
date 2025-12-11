@@ -1,0 +1,30 @@
+{
+    "bias_passed": true,
+    "global": {
+        "global_avg_overall_score": 0.4460477686940424,
+        "global_avg_success_rate": 1.0,
+        "global_avg_retrieval_recall": 0.2,
+        "global_avg_citation_f1": 0.6,
+        "max_group_avg_score": 0.4460477686940424,
+        "min_group_avg_score": 0.4460477686940424,
+        "max_gap": 0.0,
+        "max_allowed_gap": 0.2,
+        "min_group_score_threshold": 0.4
+    },
+    "per_group": {
+        "SYN": {
+            "num_tests": 5,
+            "num_success": 5,
+            "success_rate": 1.0,
+            "avg_overall_score": 0.4460477686940424,
+            "avg_groundedness": 0.8452388434702117,
+            "avg_relevancy": 0.9349999999999999,
+            "avg_citation_f1": 0.6,
+            "avg_retrieval_recall": 0.2
+        }
+    },
+    "failures": {
+        "per_group_thresholds": [],
+        "disparity_failure": false
+    }
+}

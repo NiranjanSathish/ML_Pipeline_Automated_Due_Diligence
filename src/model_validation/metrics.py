@@ -295,19 +295,20 @@ def compute_all_metrics(query: str, answer: str, sources: List[Dict],
     if 'factual_accuracy' in results:
         scores.append(results['factual_accuracy']['score'] * 0.30)
     
-    # High Priority: Is it grounded in context? (Increased weight)
+    # Medium Priority: Is it grounded in context?
     if 'groundedness' in results:
-        scores.append(results['groundedness']['score'] * 0.30)
+        scores.append(results['groundedness']['score'] * 0.20)
         
-    # Medium Priority: Did it answer the prompt keywords? (Increased weight)
+    # Medium Priority: Did it answer the prompt keywords?
     if 'answer_relevancy' in results:
-        scores.append(results['answer_relevancy']['score'] * 0.25)
+        scores.append(results['answer_relevancy']['score'] * 0.20)
         
-    # Low Priority: Section Completeness
+    # Low Priority: Formatting and Citations
+    if 'citation' in results:
+        scores.append(results['citation'].get('f1_score', 0) * 0.15)
+        
     if 'section_completeness' in results:
         scores.append(results['section_completeness']['score'] * 0.15)
-
-    # REMOVED: Citation metrics (as per user request)
 
     # If specific test case metrics aren't present, normalize the remaining weights
     # (Simple sum for now, assuming a "standard" test case has all of them)
