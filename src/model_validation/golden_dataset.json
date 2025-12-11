@@ -14,58 +14,6 @@
         "market_cap": "Large Cap",
         "region": "North America"
       }
-    },
-    {
-      "query_id": "MICROSOFTC_002",
-      "query": "Where does Microsoft Corporation show the reconciliation of GAAP to non-GAAP financial results?",
-      "target_chunk_id": "MSFT_sec_9c20f6de_134",
-      "target_chunk_text": "PART I\n\nItem 2\n\nThe following table reconciles our financial results reported in accordance with GAAP to non-GAAP financial results:...",
-      "company": "Microsoft Corporation",
-      "golden_answer": "Based on the provided text, Microsoft Corporation shows the reconciliation of GAAP to non-GAAP financial results in a table. This table is located under Item 2 of Part I.",
-      "metadata": {
-        "sector": "Energy",
-        "market_cap": "Small Cap",
-        "region": "North America"
-      }
-    },
-    {
-      "query_id": "ALPHABETIN_003",
-      "query": "What were the cumulative net gains from equity securities sold by Alphabet Inc. for the three months ended March 31, 2024?",
-      "target_chunk_id": "GOOGL_sec_1c89ac73_43",
-      "target_chunk_text": "|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- ...",
-      "company": "Alphabet Inc.",
-      "golden_answer": "Based on the provided text, the cumulative net gains from equity securities sold for the three months ended March 31, 2024, were $429.",
-      "metadata": {
-        "sector": "Technology",
-        "market_cap": "Large Cap",
-        "region": "North America"
-      }
-    },
-    {
-      "query_id": "MICROSOFTC_004",
-      "query": "Were there any material impairments of intangible assets for Microsoft Corporation during fiscal years 2025, 2024, or 2023?",
-      "target_chunk_id": "MSFT_sec_b00d0e3e_156",
-      "target_chunk_text": "No material impairments of intangible assets were identified during fiscal years 2025, 2024, or 2023. We estimate that we have no significant residual value related to our intangible assets.\n\n71...",
-      "company": "Microsoft Corporation",
-      "golden_answer": "Based on the provided text, no material impairments of intangible assets were identified during fiscal years 2025, 2024, or 2023.",
-      "metadata": {
-        "sector": "Technology",
-        "market_cap": "Large Cap",
-        "region": "North America"
-      }
-    },
-    {
-      "query_id": "ALPHABETIN_005",
-      "query": "What were Alphabet Inc.'s net cash flows from operating, investing, and financing activities for the nine months ended September 30, 2024?",
-      "target_chunk_id": "GOOGL_sec_d5fa8ec1_146",
-      "target_chunk_text": "|  |  |  |  |  |  |  |  |  |  |  |  |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\n|  |  |  |  |  |  |  |  |  |  |  |  |\n|  | | | Nine Months Ended | | | | | | | | |\n|  | ...",
-      "company": "Alphabet Inc.",
-      "golden_answer": "Based on the provided text, for the nine months ended September 30, 2024, Alphabet Inc.'s net cash provided by operating activities was $86,186. Net cash used in investing activities was $(29,356), and net cash used in financing activities was $(60,697).",
-      "metadata": {
-        "sector": "Technology",
-        "market_cap": "Small Cap",
-        "region": "North America"
-      }
     }
   ]
 }

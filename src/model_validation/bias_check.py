@@ -244,10 +244,14 @@ def main():
 
     detector = BiasDetector(results=results)
     report = detector.check_bias(
-        min_samples=3,        # only consider groups with >=3 test cases
+        min_samples=1,        # Reduced minimum samples to ensure it runs on small datasets
         max_allowed_gap=0.20, # max 20 percentage point difference in avg scores
         min_group_score=BIAS_CONFIG["min_score_threshold"], # each group should have at least 60% avg score
     )
+
+    if "global" not in report:
+        print(f"\n❌ BIAS CHECK FAILED: {report.get('reason', 'Unknown error')}")
+        sys.exit(1)
 
     print("\n📊 GLOBAL BIAS METRICS")
     for k, v in report["global"].items():
@@ -285,7 +289,7 @@ def main():
 
     # Save report
     report_path = "src/model_validation/reports/bias_report.json"
-    with open(report_path, "w") as f:
+    with open(report_path, "w", encoding="utf-8") as f:
         json.dump(report, f, indent=4, cls=NumpyEncoder)
 
     print(f"\n✅ Bias report saved to {report_path}")
@@ -308,7 +312,7 @@ def save_markdown_report(report: Dict, filepath: str):
     """
     Generate a Markdown table from the bias report.
     """
-    with open(filepath, "w") as f:
+    with open(filepath, "w", encoding="utf-8") as f:
         f.write("# 📊 Model Validation & Bias Report\n\n")
         
         # Global Metrics

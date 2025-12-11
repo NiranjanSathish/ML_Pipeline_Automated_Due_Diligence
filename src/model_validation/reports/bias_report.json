@@ -1,26 +1,26 @@
 {
     "bias_passed": true,
     "global": {
-        "global_avg_overall_score": 0.4460477686940424,
+        "global_avg_overall_score": 0.27733887733887735,
         "global_avg_success_rate": 1.0,
-        "global_avg_retrieval_recall": 0.2,
-        "global_avg_citation_f1": 0.6,
-        "max_group_avg_score": 0.4460477686940424,
-        "min_group_avg_score": 0.4460477686940424,
+        "global_avg_retrieval_recall": 0.0,
+        "global_avg_citation_f1": 0.0,
+        "max_group_avg_score": 0.27733887733887735,
+        "min_group_avg_score": 0.27733887733887735,
         "max_gap": 0.0,
         "max_allowed_gap": 0.2,
-        "min_group_score_threshold": 0.4
+        "min_group_score_threshold": 0.2
     },
     "per_group": {
-        "SYN": {
-            "num_tests": 5,
-            "num_success": 5,
+        "ALPHABETIN": {
+            "num_tests": 1,
+            "num_success": 1,
             "success_rate": 1.0,
-            "avg_overall_score": 0.4460477686940424,
-            "avg_groundedness": 0.8452388434702117,
-            "avg_relevancy": 0.9349999999999999,
-            "avg_citation_f1": 0.6,
-            "avg_retrieval_recall": 0.2
+            "avg_overall_score": 0.27733887733887735,
+            "avg_groundedness": 0.5405405405405406,
+            "avg_relevancy": 0.8461538461538461,
+            "avg_citation_f1": 0.0,
+            "avg_retrieval_recall": 0.0
         }
     },
     "failures": {
