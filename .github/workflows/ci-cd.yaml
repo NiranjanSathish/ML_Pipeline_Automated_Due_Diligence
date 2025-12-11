@@ -155,6 +155,10 @@ jobs:
       run: |
         gcloud container clusters get-credentials ${{ env.GKE_CLUSTER }} --zone ${{ env.GKE_ZONE }} --project ${{ env.PROJECT_ID }}
         
+        # Apply the manifest to update resources/config
+        kubectl apply -f k8s/agent-api.yaml
+        
+        # Update to the specific image SHA
         kubectl set image deployment/agent-api agent-api=${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.API_IMAGE }}:${{ github.sha }}
         
         if ! kubectl rollout status deployment/agent-api --timeout=60s; then
