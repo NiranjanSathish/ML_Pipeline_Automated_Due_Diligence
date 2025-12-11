@@ -100,7 +100,7 @@ class ValidationPipeline:
             
             answer = result['answer']
             sources = result['sources']
-            confidence = result['confidence']
+            confidence = result.get('confidence', 0.0)
             
             elapsed_time = time.time() - start_time
             

@@ -5418,3 +5418,99 @@
 2025-12-11 04:15:08,617 INFO [Planner]   5. Based on historical 10-K filings, what were the total authorized amounts for Alphabet's share repurchase programs over the past five years?
 2025-12-11 04:15:09,620 INFO [Planner] Planning research for: 'Amazon net sales for North America, International, and AWS for the three and six months ended June 30, 2023 and 2024.'
 2025-12-11 04:17:57,817 INFO [Planner] Planning research for: 'Alphabet Inc. marketable and non-marketable equity securities carrying value December 31 2023 and December 31 2024'
+2025-12-11 04:34:24,656 INFO [Planner] Planning research for: 'What was Alphabet Inc.'s total stock-based compensation expense for the three months ended March 31, 2023 and 2024?'
+2025-12-11 04:34:40,570 INFO [Planner] Generated 5 sub-queries:
+2025-12-11 04:34:40,571 INFO [Planner]   1. Find the line item for 'Stock-based compensation expense' in Alphabet Inc.'s Consolidated Statements of Cash Flows for the three months ended March 31, 2024, from its Q1 2024 Form 10-Q.
+2025-12-11 04:34:40,571 INFO [Planner]   2. Find the comparative figure for 'Stock-based compensation expense' for the three months ended March 31, 2023, as presented in Alphabet Inc.'s Q1 2024 Form 10-Q.
+2025-12-11 04:34:40,571 INFO [Planner]   3. Locate the 'Stock-Based Compensation' note within the Notes to Consolidated Financial Statements in Alphabet's Q1 2024 Form 10-Q for a detailed breakdown.
+2025-12-11 04:34:40,572 INFO [Planner]   4. Search the 'Management’s Discussion and Analysis of Financial Condition and Results of Operations' in Alphabet's Q1 2024 Form 10-Q for any explanation of changes in stock-based compensation.
+2025-12-11 04:34:40,582 INFO [Planner]   5. What was Alphabet Inc.'s total stock-based compensation expense for the full fiscal year 2023, as reported in their annual Form 10-K, to provide context for the quarterly figures?
+2025-12-11 04:34:40,584 INFO [Researcher] 🔎 Researching 5 sub-queries for Global Reranking...
+2025-12-11 04:34:40,584 INFO [Researcher]   Query 1: Find the line item for 'Stock-based compensation expense' in Alphabet Inc.'s Consolidated Statements of Cash Flows for the three months ended March 31, 2024, from its Q1 2024 Form 10-Q.
+2025-12-11 04:34:43,157 INFO [Researcher]   Query 2: Find the comparative figure for 'Stock-based compensation expense' for the three months ended March 31, 2023, as presented in Alphabet Inc.'s Q1 2024 Form 10-Q.
+2025-12-11 04:34:44,855 INFO [Researcher]   Query 3: Locate the 'Stock-Based Compensation' note within the Notes to Consolidated Financial Statements in Alphabet's Q1 2024 Form 10-Q for a detailed breakdown.
+2025-12-11 04:34:46,556 INFO [Researcher]   Query 4: Search the 'Management’s Discussion and Analysis of Financial Condition and Results of Operations' in Alphabet's Q1 2024 Form 10-Q for any explanation of changes in stock-based compensation.
+2025-12-11 04:34:48,484 INFO [Researcher]   Query 5: What was Alphabet Inc.'s total stock-based compensation expense for the full fiscal year 2023, as reported in their annual Form 10-K, to provide context for the quarterly figures?
+2025-12-11 04:34:50,677 INFO [Researcher] 📥 Aggregated Pool: 61 unique chunks. Starting Global Rerank...
+2025-12-11 04:35:30,554 INFO [Researcher] ✅ Selected Top 20 Global Chunks
+2025-12-11 04:35:30,555 INFO [Synthesiser] Generating answer...
+2025-12-11 04:35:50,684 INFO [Synthesiser] Answer generated
+2025-12-11 04:35:51,686 INFO [Planner] Planning research for: 'Where does Microsoft Corporation show the reconciliation of GAAP to non-GAAP financial results?'
+2025-12-11 04:36:08,737 INFO [Planner] Generated 5 sub-queries:
+2025-12-11 04:36:08,737 INFO [Planner]   1. Search Microsoft's most recent Form 10-K filing for the section titled 'Non-GAAP Financial Measures' or a table reconciling GAAP to non-GAAP results.
+2025-12-11 04:36:08,738 INFO [Planner]   2. Locate the GAAP to non-GAAP reconciliation tables within Microsoft's latest Form 10-Q filing, specifically in the Management's Discussion and Analysis (MD&A) section.
+2025-12-11 04:36:08,738 INFO [Planner]   3. Analyze recent news articles covering Microsoft's quarterly earnings announcements to find summaries of their non-GAAP financial results and the key adjustments mentioned.
+2025-12-11 04:36:08,738 INFO [Planner]   4. From Microsoft's latest 10-K or 10-Q, identify the specific line items that are adjusted to reconcile GAAP net income to non-GAAP net income, such as stock-based compensation or acquisition-related expenses.
+2025-12-11 04:36:08,739 INFO [Planner]   5. Retrieve the definition and management's explanation for why they use non-GAAP financial measures from the MD&A section of Microsoft's most recent Form 10-K.
+2025-12-11 04:36:08,739 INFO [Researcher] 🔎 Researching 5 sub-queries for Global Reranking...
+2025-12-11 04:36:08,739 INFO [Researcher]   Query 1: Search Microsoft's most recent Form 10-K filing for the section titled 'Non-GAAP Financial Measures' or a table reconciling GAAP to non-GAAP results.
+2025-12-11 04:36:11,061 INFO [Researcher]   Query 2: Locate the GAAP to non-GAAP reconciliation tables within Microsoft's latest Form 10-Q filing, specifically in the Management's Discussion and Analysis (MD&A) section.
+2025-12-11 04:36:12,964 INFO [Researcher]   Query 3: Analyze recent news articles covering Microsoft's quarterly earnings announcements to find summaries of their non-GAAP financial results and the key adjustments mentioned.
+2025-12-11 04:36:14,679 INFO [Researcher]   Query 4: From Microsoft's latest 10-K or 10-Q, identify the specific line items that are adjusted to reconcile GAAP net income to non-GAAP net income, such as stock-based compensation or acquisition-related expenses.
+2025-12-11 04:36:16,301 INFO [Researcher]   Query 5: Retrieve the definition and management's explanation for why they use non-GAAP financial measures from the MD&A section of Microsoft's most recent Form 10-K.
+2025-12-11 04:36:18,553 INFO [Researcher] 📥 Aggregated Pool: 94 unique chunks. Starting Global Rerank...
+2025-12-11 04:37:10,629 INFO [Planner] Planning research for: 'What was Alphabet Inc.'s total stock-based compensation expense for the three months ended March 31, 2023 and 2024?'
+2025-12-11 04:37:30,570 INFO [Planner] Generated 5 sub-queries:
+2025-12-11 04:37:30,570 INFO [Planner]   1. Locate Alphabet Inc.'s Form 10-Q SEC filing for the quarterly period ended March 31, 2024.
+2025-12-11 04:37:30,571 INFO [Planner]   2. From the Consolidated Statements of Cash Flows in Alphabet's Q1 2024 10-Q, find the line item for 'Stock-based compensation expense' for the three months ended March 31, 2024.
+2025-12-11 04:37:30,571 INFO [Planner]   3. From the same Consolidated Statements of Cash Flows in the Q1 2024 10-Q, find the comparative figure for 'Stock-based compensation expense' for the three months ended March 31, 2023.
+2025-12-11 04:37:30,571 INFO [Planner]   4. Locate the 'Notes to Consolidated Financial Statements' within the Q1 2024 10-Q and find the specific note on 'Stock-Based Compensation' for a detailed breakdown.
+2025-12-11 04:37:30,572 INFO [Planner]   5. Search news articles from April-May 2024 for any management commentary or analysis regarding Alphabet's stock-based compensation expenses mentioned in the Q1 2024 earnings report.
+2025-12-11 04:37:30,572 INFO [Researcher] 🔎 Researching 5 sub-queries for Global Reranking...
+2025-12-11 04:37:30,574 INFO [Researcher]   Query 1: Locate Alphabet Inc.'s Form 10-Q SEC filing for the quarterly period ended March 31, 2024.
+2025-12-11 04:37:32,784 INFO [Researcher]   Query 2: From the Consolidated Statements of Cash Flows in Alphabet's Q1 2024 10-Q, find the line item for 'Stock-based compensation expense' for the three months ended March 31, 2024.
+2025-12-11 04:37:34,855 INFO [Researcher]   Query 3: From the same Consolidated Statements of Cash Flows in the Q1 2024 10-Q, find the comparative figure for 'Stock-based compensation expense' for the three months ended March 31, 2023.
+2025-12-11 04:37:36,964 INFO [Researcher]   Query 4: Locate the 'Notes to Consolidated Financial Statements' within the Q1 2024 10-Q and find the specific note on 'Stock-Based Compensation' for a detailed breakdown.
+2025-12-11 04:37:38,896 INFO [Researcher]   Query 5: Search news articles from April-May 2024 for any management commentary or analysis regarding Alphabet's stock-based compensation expenses mentioned in the Q1 2024 earnings report.
+2025-12-11 04:37:40,604 INFO [Researcher] 📥 Aggregated Pool: 82 unique chunks. Starting Global Rerank...
+2025-12-11 04:38:27,149 INFO [Planner] Planning research for: 'What was Alphabet Inc.'s total stock-based compensation expense for the three months ended March 31, 2023 and 2024?'
+2025-12-11 04:38:43,900 INFO [Planner] Generated 5 sub-queries:
+2025-12-11 04:38:43,900 INFO [Planner]   1. Find the total stock-based compensation expense for the three months ended March 31, 2024, from Alphabet Inc.'s Form 10-Q.
+2025-12-11 04:38:43,901 INFO [Planner]   2. Find the comparative stock-based compensation expense for the three months ended March 31, 2023, within Alphabet Inc.'s Q1 2024 Form 10-Q.
+2025-12-11 04:38:43,901 INFO [Planner]   3. Locate the 'Stock-based compensation' line item within the Consolidated Statements of Cash Flows in Alphabet Inc.'s Form 10-Q for the quarter ended March 31, 2024.
+2025-12-11 04:38:43,901 INFO [Planner]   4. Cross-reference the 2023 figure by finding the stock-based compensation expense in Alphabet Inc.'s Form 10-Q for the quarter ended March 31, 2023.
+2025-12-11 04:38:43,902 INFO [Planner]   5. Review news articles summarizing Alphabet Inc.'s Q1 2024 earnings report for any mention or analysis of the stock-based compensation expense.
+2025-12-11 04:38:43,902 INFO [Researcher] 🔎 Researching 5 sub-queries for Global Reranking...
+2025-12-11 04:38:43,903 INFO [Researcher]   Query 1: Find the total stock-based compensation expense for the three months ended March 31, 2024, from Alphabet Inc.'s Form 10-Q.
+2025-12-11 04:38:46,052 INFO [Researcher]   Query 2: Find the comparative stock-based compensation expense for the three months ended March 31, 2023, within Alphabet Inc.'s Q1 2024 Form 10-Q.
+2025-12-11 04:38:47,558 INFO [Researcher]   Query 3: Locate the 'Stock-based compensation' line item within the Consolidated Statements of Cash Flows in Alphabet Inc.'s Form 10-Q for the quarter ended March 31, 2024.
+2025-12-11 04:38:49,067 INFO [Researcher]   Query 4: Cross-reference the 2023 figure by finding the stock-based compensation expense in Alphabet Inc.'s Form 10-Q for the quarter ended March 31, 2023.
+2025-12-11 04:38:50,554 INFO [Researcher]   Query 5: Review news articles summarizing Alphabet Inc.'s Q1 2024 earnings report for any mention or analysis of the stock-based compensation expense.
+2025-12-11 04:38:52,060 INFO [Researcher] 📥 Aggregated Pool: 64 unique chunks. Starting Global Rerank...
+2025-12-11 04:39:57,141 INFO [Researcher] ✅ Selected Top 20 Global Chunks
+2025-12-11 04:39:57,142 INFO [Synthesiser] Generating answer...
+2025-12-11 04:40:11,911 INFO [Synthesiser] Answer generated
+2025-12-11 04:40:12,915 INFO [Planner] Planning research for: 'Where does Microsoft Corporation show the reconciliation of GAAP to non-GAAP financial results?'
+2025-12-11 04:40:30,551 INFO [Planner] Generated 5 sub-queries:
+2025-12-11 04:40:30,552 INFO [Planner]   1. Search Microsoft's most recent Form 10-K for a section titled 'Non-GAAP Financial Measures' and extract the reconciliation tables for operating income, net income, and diluted earnings per share.
+2025-12-11 04:40:30,552 INFO [Planner]   2. In Microsoft's latest Form 10-Q, locate the 'Management's Discussion and Analysis' section to find the reconciliation of GAAP to non-GAAP financial results for the most recent quarter.
+2025-12-11 04:40:30,553 INFO [Planner]   3. Review Microsoft's recent earnings press releases, typically filed as an exhibit to a Form 8-K, for tables that reconcile GAAP and non-GAAP financial measures.
+2025-12-11 04:40:30,553 INFO [Planner]   4. From Microsoft's latest annual SEC filing (10-K), identify and list the specific categories of adjustments (e.g., amortization of intangible assets, stock-based compensation) used to derive non-GAAP figures from GAAP figures.
+2025-12-11 04:40:30,553 INFO [Planner]   5. Search news articles from the last year that discuss Microsoft's earnings reports and identify any mentions of the company's non-GAAP results or the reasons provided for the adjustments from GAAP.
+2025-12-11 04:40:30,554 INFO [Researcher] 🔎 Researching 5 sub-queries for Global Reranking...
+2025-12-11 04:40:30,554 INFO [Researcher]   Query 1: Search Microsoft's most recent Form 10-K for a section titled 'Non-GAAP Financial Measures' and extract the reconciliation tables for operating income, net income, and diluted earnings per share.
+2025-12-11 04:40:33,119 INFO [Researcher]   Query 2: In Microsoft's latest Form 10-Q, locate the 'Management's Discussion and Analysis' section to find the reconciliation of GAAP to non-GAAP financial results for the most recent quarter.
+2025-12-11 04:40:35,432 INFO [Researcher]   Query 3: Review Microsoft's recent earnings press releases, typically filed as an exhibit to a Form 8-K, for tables that reconcile GAAP and non-GAAP financial measures.
+2025-12-11 04:40:37,612 INFO [Researcher]   Query 4: From Microsoft's latest annual SEC filing (10-K), identify and list the specific categories of adjustments (e.g., amortization of intangible assets, stock-based compensation) used to derive non-GAAP figures from GAAP figures.
+2025-12-11 04:40:39,604 INFO [Researcher]   Query 5: Search news articles from the last year that discuss Microsoft's earnings reports and identify any mentions of the company's non-GAAP results or the reasons provided for the adjustments from GAAP.
+2025-12-11 04:40:41,179 INFO [Researcher] 📥 Aggregated Pool: 94 unique chunks. Starting Global Rerank...
+2025-12-11 04:41:34,397 INFO [Researcher] ✅ Selected Top 20 Global Chunks
+2025-12-11 04:41:34,398 INFO [Synthesiser] Generating answer...
+2025-12-11 04:41:50,938 INFO [Synthesiser] Answer generated
+2025-12-11 04:41:51,942 INFO [Planner] Planning research for: 'What were the cumulative net gains from equity securities sold by Alphabet Inc. for the three months ended March 31, 2024?'
+2025-12-11 04:42:09,620 INFO [Planner] Generated 5 sub-queries:
+2025-12-11 04:42:09,621 INFO [Planner]   1. Locate Alphabet Inc.'s Form 10-Q for the quarter ended March 31, 2024, and find the specific line item for 'gains (losses) on equity securities, net' within the Consolidated Statements of Income.
+2025-12-11 04:42:09,621 INFO [Planner]   2. From Alphabet Inc.'s Form 10-Q for the quarter ended March 31, 2024, what was the comparative figure for 'gains (losses) on equity securities, net' for the three months ended March 31, 2023?
+2025-12-11 04:42:09,622 INFO [Planner]   3. In the 'Notes to Consolidated Financial Statements' section of Alphabet's Q1 2024 10-Q, find the note detailing 'Other Income (Expense), Net' to see a breakdown of investment-related income.
+2025-12-11 04:42:09,622 INFO [Planner]   4. Review the 'Management's Discussion and Analysis of Financial Condition and Results of Operations' (MD&A) in Alphabet's Q1 2024 10-Q for any explanation regarding the performance of their equity securities portfolio.
+2025-12-11 04:42:09,622 INFO [Planner]   5. Search news articles published immediately following Alphabet's Q1 2024 earnings release for any commentary on how investment gains or losses impacted the company's reported earnings per share.
+2025-12-11 04:42:09,622 INFO [Researcher] 🔎 Researching 5 sub-queries for Global Reranking...
+2025-12-11 04:42:09,624 INFO [Researcher]   Query 1: Locate Alphabet Inc.'s Form 10-Q for the quarter ended March 31, 2024, and find the specific line item for 'gains (losses) on equity securities, net' within the Consolidated Statements of Income.
+2025-12-11 04:42:11,495 INFO [Researcher]   Query 2: From Alphabet Inc.'s Form 10-Q for the quarter ended March 31, 2024, what was the comparative figure for 'gains (losses) on equity securities, net' for the three months ended March 31, 2023?
+2025-12-11 04:42:13,286 INFO [Researcher]   Query 3: In the 'Notes to Consolidated Financial Statements' section of Alphabet's Q1 2024 10-Q, find the note detailing 'Other Income (Expense), Net' to see a breakdown of investment-related income.
+2025-12-11 04:42:14,863 INFO [Researcher]   Query 4: Review the 'Management's Discussion and Analysis of Financial Condition and Results of Operations' (MD&A) in Alphabet's Q1 2024 10-Q for any explanation regarding the performance of their equity securities portfolio.
+2025-12-11 04:42:16,479 INFO [Researcher]   Query 5: Search news articles published immediately following Alphabet's Q1 2024 earnings release for any commentary on how investment gains or losses impacted the company's reported earnings per share.
+2025-12-11 04:42:17,967 INFO [Researcher] 📥 Aggregated Pool: 85 unique chunks. Starting Global Rerank...
+2025-12-11 04:42:57,882 INFO [Researcher] ✅ Selected Top 20 Global Chunks
+2025-12-11 04:42:57,883 INFO [Synthesiser] Generating answer...
+2025-12-11 04:43:16,069 INFO [Synthesiser] Answer generated
