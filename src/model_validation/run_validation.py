@@ -53,8 +53,8 @@ class ValidationPipeline:
         if test_dataset_path:
             self.test_cases = TestDataset.load_from_file(test_dataset_path)
         else:
-            dataset = TestDataset()
-            self.test_cases = dataset.get_test_cases()
+            # Default to golden dataset
+            self.test_cases = TestDataset.load_from_file("src/model_validation/golden_dataset.json")
         
         print(f"✅ Loaded {len(self.test_cases)} test cases")
         
@@ -92,7 +92,7 @@ class ValidationPipeline:
             
             # Step 2: Researcher retrieves information
             print("\n[2/3] Researcher: Retrieving information...")
-            retrieved_chunks = self.researcher.execute(sub_queries)
+            retrieved_chunks = self.researcher.execute(sub_queries, query)
             
             # Step 3: Synthesiser generates answer
             print("\n[3/3] Synthesiser: Generating answer...")
