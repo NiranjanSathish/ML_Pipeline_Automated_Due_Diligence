@@ -21,7 +21,7 @@ from src.model_validation.test_dataset import TestDataset
 from src.model_validation.metrics import compute_all_metrics
 
 # Import agent system
-from src.agents.analyser_agent import AnalyserAgent
+from src.agents.planner_agent import PlannerAgent
 from src.agents.researcher_agent import ResearcherAgent
 from src.agents.synthesiser_agent import SynthesiserAgent
 from src.tools.hybrid_search import HybridSearchEngine
@@ -62,7 +62,7 @@ class ValidationPipeline:
         print("\n🔧 Initializing agents...")
         self.search_engine = HybridSearchEngine()
         self.reranker = Reranker()
-        self.analyser = AnalyserAgent()
+        self.planner = PlannerAgent()
         self.researcher = ResearcherAgent(self.search_engine, self.reranker)
         self.synthesiser = SynthesiserAgent()
         
@@ -87,8 +87,8 @@ class ValidationPipeline:
         
         try:
             # Step 1: Analyser decomposes query
-            print("\n[1/3] Analyser: Decomposing query...")
-            sub_queries = self.analyser.execute(query)
+            print("\n[1/3] Planner: Decomposing query...")
+            sub_queries = self.planner.execute(query)
             
             # Step 2: Researcher retrieves information
             print("\n[2/3] Researcher: Retrieving information...")
