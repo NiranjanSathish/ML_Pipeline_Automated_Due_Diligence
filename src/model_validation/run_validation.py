@@ -275,7 +275,6 @@ class ValidationPipeline:
             'all_criteria_met': all_passed,
             'criteria': criteria,
             'summary': summary,
-            'acceptance_criteria': acceptance,
             'detailed_results': self.results
         }
     
@@ -350,7 +349,8 @@ def main():
         print(f"   Threshold: {criterion['threshold']}")
         print(f"   Actual: {criterion['actual']:.4f}")
     
-    print("\n" + acceptance['summary'])
+    print("\nSummary Validation Details:")
+    print(json.dumps(acceptance['summary'], indent=2, cls=NumpyEncoder))
     
     # Save results
     results_file = pipeline.save_results()

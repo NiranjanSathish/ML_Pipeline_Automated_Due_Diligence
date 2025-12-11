@@ -33,7 +33,7 @@ README DataPipeline.md
 .github/workflows/ci.yaml
 .github/workflows/cd.yaml
 .github/workflows/pipeline.yaml
-.github/workflows/cicd.yml
+.github/workflows/ci-cd.yml
 
 # Virtual Environment
 venv/
