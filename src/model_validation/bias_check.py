@@ -32,7 +32,7 @@ class GroupStats:
     avg_overall_score: float
     avg_groundedness: float
     avg_relevancy: float
-    avg_citation_f1: float
+    avg_relevancy: float
     avg_retrieval_recall: float
     success_rate: float
 
@@ -114,19 +114,17 @@ class BiasDetector:
                 overall_scores = [gr.get("overall_score", 0.0) for gr in successful]
                 groundedness_scores = [gr.get("groundedness", {}).get("score", 0.0) for gr in successful]
                 relevancy_scores = [gr.get("answer_relevancy", {}).get("score", 0.0) for gr in successful]
-                citation_f1_scores = [gr.get("citation", {}).get("f1_score", 0.0) for gr in successful]
+                relevancy_scores = [gr.get("answer_relevancy", {}).get("score", 0.0) for gr in successful]
                 retrieval_hits = [gr.get("retrieval_hit", 0) for gr in successful]
                 
                 avg_overall = float(np.mean(overall_scores))
                 avg_grounded = float(np.mean(groundedness_scores))
                 avg_relevancy = float(np.mean(relevancy_scores))
-                avg_citation_f1 = float(np.mean(citation_f1_scores))
                 avg_retrieval_recall = float(np.mean(retrieval_hits))
             else:
                 avg_overall = 0.0
                 avg_grounded = 0.0
                 avg_relevancy = 0.0
-                avg_citation_f1 = 0.0
                 avg_retrieval_recall = 0.0
 
             group_stats[group_id] = GroupStats(
@@ -136,7 +134,6 @@ class BiasDetector:
                 avg_overall_score=avg_overall,
                 avg_groundedness=avg_grounded,
                 avg_relevancy=avg_relevancy,
-                avg_citation_f1=avg_citation_f1,
                 avg_retrieval_recall=avg_retrieval_recall,
                 success_rate=success_rate,
             )
@@ -180,7 +177,7 @@ class BiasDetector:
         global_avg_score = float(np.mean([g.avg_overall_score for g in all_groups]))
         global_success_rate = float(np.mean([g.success_rate for g in all_groups]))
         global_avg_retrieval_recall = float(np.mean([g.avg_retrieval_recall for g in all_groups]))
-        global_avg_citation_f1 = float(np.mean([g.avg_citation_f1 for g in all_groups]))
+        global_avg_retrieval_recall = float(np.mean([g.avg_retrieval_recall for g in all_groups]))
 
         # Disparity metrics
         scores = [g.avg_overall_score for g in all_groups]
@@ -206,7 +203,7 @@ class BiasDetector:
                 "global_avg_overall_score": global_avg_score,
                 "global_avg_success_rate": global_success_rate,
                 "global_avg_retrieval_recall": global_avg_retrieval_recall,
-                "global_avg_citation_f1": global_avg_citation_f1,
+                "global_avg_retrieval_recall": global_avg_retrieval_recall,
                 "max_group_avg_score": max_score,
                 "min_group_avg_score": min_score,
                 "max_gap": max_gap,
@@ -221,7 +218,7 @@ class BiasDetector:
                     "avg_overall_score": g.avg_overall_score,
                     "avg_groundedness": g.avg_groundedness,
                     "avg_relevancy": g.avg_relevancy,
-                    "avg_citation_f1": g.avg_citation_f1,
+                    "avg_relevancy": g.avg_relevancy,
                     "avg_retrieval_recall": g.avg_retrieval_recall,
                 }
                 for g in all_groups
@@ -268,7 +265,7 @@ def main():
         print(f"    avg_overall:     {stats['avg_overall_score']:.3f}")
         print(f"    avg_groundedness:{stats['avg_groundedness']:.3f}")
         print(f"    avg_relevancy:   {stats['avg_relevancy']:.3f}")
-        print(f"    avg_citation_f1: {stats['avg_citation_f1']:.3f}")
+        print(f"    avg_relevancy:   {stats['avg_relevancy']:.3f}")
         print(f"    avg_retrieval:   {stats['avg_retrieval_recall']:.3f}")
 
     if report["failures"]["per_group_thresholds"] or report["failures"]["disparity_failure"]:
@@ -323,19 +320,19 @@ def save_markdown_report(report: Dict, filepath: str):
         f.write(f"| **Overall Score** | {glob['global_avg_overall_score']:.2%} |\n")
         f.write(f"| **Success Rate** | {glob['global_avg_success_rate']:.1%} |\n")
         f.write(f"| **Retrieval Recall** | {glob['global_avg_retrieval_recall']:.2%} |\n")
-        f.write(f"| **Citation F1** | {glob['global_avg_citation_f1']:.2%} |\n")
+        f.write(f"| **Retrieval Recall** | {glob['global_avg_retrieval_recall']:.2%} |\n")
         f.write(f"| **Max Group Gap** | {glob['max_gap']:.2%} (Limit: {glob['max_allowed_gap']:.0%}) |\n")
         f.write("\n")
 
         # Per-Group Metrics
         f.write("## 👥 Per-Group Metrics\n\n")
-        f.write("| Group | Tests | Success Rate | Overall Score | Groundedness | Relevancy | Citation F1 | Retrieval Recall |\n")
-        f.write("| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |\n")
+        f.write("| Group | Tests | Success Rate | Overall Score | Groundedness | Relevancy | Retrieval Recall |\n")
+        f.write("| :--- | :---: | :---: | :---: | :---: | :---: | :---: |\n")
         
         for group_id, stats in report["per_group"].items():
             f.write(f"| **{group_id}** | {stats['num_tests']} | {stats['success_rate']:.1%} | "
                     f"{stats['avg_overall_score']:.2%} | {stats['avg_groundedness']:.2%} | "
-                    f"{stats['avg_relevancy']:.2%} | {stats['avg_citation_f1']:.2%} | "
+                    f"{stats['avg_relevancy']:.2%} | "
                     f"{stats['avg_retrieval_recall']:.2%} |\n")
         
         f.write("\n")

@@ -9,7 +9,7 @@ sys.path.append('.')
 import json
 from src.agents.planner_agent import PlannerAgent
 
-def validate_planner(test_file: str = "src/model_validation/test_dataset.json"):
+def validate_planner(test_file: str = "src/model_validation/golden_dataset.json"):
     print("\n" + "="*70)
     print("🧠 VALIDATING PLANNER AGENT (STRUCTURE TEST)")
     print("="*70)

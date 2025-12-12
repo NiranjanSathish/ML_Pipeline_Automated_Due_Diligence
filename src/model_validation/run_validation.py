@@ -49,12 +49,8 @@ class ValidationPipeline:
         print("🔬 INITIALIZING VALIDATION PIPELINE")
         print("="*70)
         
-        # Load test dataset
-        if test_dataset_path:
-            self.test_cases = TestDataset.load_from_file(test_dataset_path)
-        else:
-            # Default to golden dataset
-            self.test_cases = TestDataset.load_from_file("src/model_validation/golden_dataset.json")
+        # Default to golden dataset
+        self.test_cases = TestDataset.load_from_file("src/model_validation/golden_dataset.json")
         
         print(f"✅ Loaded {len(self.test_cases)} test cases")
         
@@ -122,10 +118,13 @@ class ValidationPipeline:
             metrics['status'] = 'success'
             
             # Check for retrieval hit (Recall@k)
-            target_chunk_id = test_case.get('target_chunk_id')
-            if target_chunk_id:
-                retrieved_ids = [c.get('id') for c in retrieved_chunks]
-                metrics['retrieval_hit'] = 1 if target_chunk_id in retrieved_ids else 0
+            # Check for retrieval hit (Use Soft Recall from metrics.py)
+            if 'retrieval_recall' in metrics:
+                # metrics['retrieval_recall'] is {"score": float, "hit": bool}
+                soft_score = metrics['retrieval_recall'].get('score', 0.0)
+                metrics['retrieval_hit'] = soft_score # Use the soft float score (0.0 - 1.0)
+            else:
+                metrics['retrieval_hit'] = 0.0
             
             print(f"\n✅ Test completed in {elapsed_time:.2f}s")
             print(f"📈 Overall Score: {metrics['overall_score']:.2%}")

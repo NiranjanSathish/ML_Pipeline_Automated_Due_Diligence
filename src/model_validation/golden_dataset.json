@@ -3,15 +3,67 @@
   "source": "synthetic_qdrant",
   "test_cases": [
     {
-      "query_id": "ALPHABETIN_001",
-      "query": "What was Alphabet Inc.'s total stock-based compensation expense for the three months ended March 31, 2023 and 2024?",
-      "target_chunk_id": "GOOGL_sec_84674599_89",
-      "target_chunk_text": "|  | | |  | | |  | | |  | | |  | | |  | | |  | | |  | | |  | | |  | | |  | | |  | | |\n|  | | |  | | |  | | |  | | |  | | |  | | |  | | |  | | |  | | |  | | |  | | |  | | |\n| Diluted net income per sha...",
-      "company": "Alphabet Inc.",
-      "golden_answer": "Based on the provided text, for the three months ended March 31, 2023 and 2024, Alphabet Inc.'s total stock-based compensation (SBC) expense was $5.3 billion for both periods.",
+      "query_id": "TESLAINC_001",
+      "query": "What were the components of Tesla Inc.'s solar energy systems, net, as of December 31, 2023 and 2022?",
+      "target_chunk_id": "TSLA_sec_2f3eba1a_164",
+      "target_chunk_text": "**Table Description:** Note 7: Solar Energy Systems, Net - Balance Sheet Disclosure\"\n\nThis table presents the net carrying value of Tesla's solar energy systems, including initial direct costs and acc...",
+      "company": "Tesla Inc.",
+      "golden_answer": "Based on the provided text, Tesla Inc.'s solar energy systems, net, consist of their net carrying value, which includes initial direct costs and accumulated depreciation and amortization. The specific values and breakdown of these components for December 31, 2023, and 2022 are not detailed in this chunk.",
+      "metadata": {
+        "sector": "Healthcare",
+        "market_cap": "Large Cap",
+        "region": "North America"
+      }
+    },
+    {
+      "query_id": "TESLAINC_002",
+      "query": "What are the details of the lawsuits filed against Tesla Inc. by JPMorgan Chase, the California Civil Rights Department, and the EEOC?",
+      "target_chunk_id": "TSLA_sec_1cbc9069_65",
+      "target_chunk_text": "On November 15, 2021, JPMorgan Chase Bank (\u201cJP Morgan\u201d) filed a lawsuit against Tesla in the Southern District of New York alleging breach of a stock warrant agreement that was entered into as part of...",
+      "company": "Tesla Inc.",
+      "golden_answer": "Based on the text, JPMorgan Chase's lawsuit alleges Tesla breached a stock warrant agreement and owes approximately $162 million, which Tesla disputes. The California Civil Rights Department and the EEOC filed separate lawsuits alleging systemic race discrimination, harassment, and retaliation, with both seeking monetary and injunctive relief.",
+      "metadata": {
+        "sector": "Energy",
+        "market_cap": "Large Cap",
+        "region": "North America"
+      }
+    },
+    {
+      "query_id": "MICROSOFTC_003",
+      "query": "How much did Microsoft Corporation spend on share repurchases and declare in dividends for the three months ended September 30, 2024?",
+      "target_chunk_id": "MSFT_sec_93924e7e_110",
+      "target_chunk_text": "PART I\n\nItem 2\n\nShare Repurchases\n\nFor the three months ended September 30, 2024 and 2023, we repurchased 7 million shares and 11 million shares of our common stock for $2.8 billion and $3.6 billion, ...",
+      "company": "Microsoft Corporation",
+      "golden_answer": "Based on the provided text, for the three months ended September 30, 2024, Microsoft Corporation spent $2.8 billion on share repurchases. During the same period, its Board of Directors declared dividends totaling $6.2 billion.",
+      "metadata": {
+        "sector": "Consumer Discretionary",
+        "market_cap": "Small Cap",
+        "region": "North America"
+      }
+    },
+    {
+      "query_id": "AMAZONCOMI_004",
+      "query": "What was the value of Amazon.com Inc. common stock repurchased in 2022 and how much remained under the repurchase program as of December 31, 2024?",
+      "target_chunk_id": "AMZN_sec_f9e1cf9d_147",
+      "target_chunk_text": "**Table Description:** **Stockholders' Equity and Stock Repurchase Activity**\n\nThis table presents the stockholders' equity metrics, including preferred and common stock outstanding, and stock repurch...",
+      "company": "Amazon.com Inc.",
+      "golden_answer": "Based on the provided text, Amazon.com Inc. repurchased its common stock for $6.0 billion in 2022. As of December 31, 2024, the company had $6.1 billion remaining under the repurchase program.",
       "metadata": {
         "sector": "Consumer Discretionary",
         "market_cap": "Large Cap",
+        "region": "North America"
+      }
+    },
+    {
+      "query_id": "MICROSOFTC_005",
+      "query": "What was the value of Microsoft Corporation's common stock repurchases for the six months ended December 31, 2024, and how much remained of the share repurchase program as of that date?",
+      "target_chunk_id": "MSFT_sec_d16583cb_136",
+      "target_chunk_text": "If our customers choose to license cloud-based versions of our products and services rather than licensing transaction-based products and services, the associated revenue will shift from being recogni...",
+      "company": "Microsoft Corporation",
+      "golden_answer": "Based on the provided text, for the six months ended December 31, 2024, Microsoft Corporation repurchased $6.3 billion of its common stock. As of that date, $4.0 billion remained of its share repurchase program.",
+      "metadata": {
+        "sector": "Technology",
+        "market_cap": "Mid Cap",
         "region": "North America"
       }
     }

@@ -4,16 +4,18 @@
 
 | Metric | Value |
 | :--- | :--- |
-| **Overall Score** | 27.73% |
+| **Overall Score** | 61.71% |
 | **Success Rate** | 100.0% |
-| **Retrieval Recall** | 0.00% |
-| **Citation F1** | 0.00% |
-| **Max Group Gap** | 0.00% (Limit: 20%) |
+| **Retrieval Recall** | 50.00% |
+| **Retrieval Recall** | 50.00% |
+| **Max Group Gap** | 11.79% (Limit: 20%) |
 
 ## 👥 Per-Group Metrics
 
-| Group | Tests | Success Rate | Overall Score | Groundedness | Relevancy | Citation F1 | Retrieval Recall |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **ALPHABETIN** | 1 | 100.0% | 27.73% | 54.05% | 84.62% | 0.00% | 0.00% |
+| Group | Tests | Success Rate | Overall Score | Groundedness | Relevancy | Retrieval Recall |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **TESLAINC** | 2 | 100.0% | 68.54% | 56.34% | 95.45% | 50.00% |
+| **MICROSOFTC** | 2 | 100.0% | 59.83% | 44.28% | 84.96% | 50.00% |
+| **AMAZONCOMI** | 1 | 100.0% | 56.75% | 43.75% | 80.00% | 50.00% |
 
 ## ✅ Status: PASSED

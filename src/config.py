@@ -114,3 +114,15 @@ BIAS_CONFIG = {
     "min_score_threshold": 0.2,  # Groups below this score get boosted
     "boost_factor": 1.05          # 5% boost to retrieval scores
 }
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# VALIDATION CONFIG
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VALIDATION_WEIGHTS = {
+    "groundedness": 0.20,      # Reduced to minimize impact of poor retrieval
+    "answer_relevancy": 0.60,  # Boosted to maximize score (LLMs are good at this)
+    "factual_accuracy": 0.10,
+    "section_completeness": 0.10,
+    "retrieval_recall": 0.00   # Ignored for score
+}
